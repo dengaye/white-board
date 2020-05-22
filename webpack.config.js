@@ -3,7 +3,7 @@ const HtmlWebpackPlugin = require('html-webpack-plugin');
 const { CleanWebpackPlugin } = require('clean-webpack-plugin');
 
 module.exports = {
-    entry: './src/app.js',
+    entry: './src/index.js',
     output: {
         filename: '[name].bould.js',
         path: path.resolve(__dirname, 'dist')
@@ -18,13 +18,13 @@ module.exports = {
             {
                 test: /\.css$/,
                 use: [
-                    'style.loader',
-                    'css.loader'
+                    'style-loader',
+                    'css-loader'
                 ]
             },
             {
                 test: /\.(png|jpg|svg|gif)$/,
-                use: ['file.loader']
+                use: ['file-loader']
             }
         ]
     },
@@ -36,7 +36,7 @@ module.exports = {
     plugins: [
         new CleanWebpackPlugin(),
         new HtmlWebpackPlugin({
-            title: 'Hello World'
+            template: './src/index.html',
         })
     ]
 }

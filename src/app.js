@@ -1,7 +1,13 @@
-const component = () => {
-    const element = document.createElement('div');
-    element.innerHTML = 'Hello World';
-    return element;
+import React from 'react';
+
+class App extends React.Component {
+    render() {
+        return (
+            <div>
+                <h1> webpack react </h1>
+            </div>
+        )
+    }
 }
 
-document.body.appendChild(component());
+export default App;
