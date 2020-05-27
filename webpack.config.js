@@ -6,7 +6,8 @@ module.exports = {
     entry: './src/index.js',
     output: {
         filename: '[name].bould.js',
-        path: path.resolve(__dirname, 'dist')
+        path: path.resolve(__dirname, 'dist'),
+        publicPath: '/'
     },
     module: {
         rules: [
@@ -30,8 +31,9 @@ module.exports = {
     },
     devServer: {
         contentBase: path.join(__dirname, 'dist'),
-        // hot: true,
         port: 9000,
+        publicPath: '/',
+        historyApiFallback: true,
     },
     plugins: [
         new CleanWebpackPlugin(),
