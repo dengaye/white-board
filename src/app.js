@@ -1,10 +1,14 @@
 import React from 'react';
+import { Link } from 'react-router-dom';
 
 class App extends React.Component {
     render() {
         return (
             <div>
-                <h1> webpack react </h1>
+                 <ul>
+                    <li><Link to='/home'>home</Link></li>
+                    <li><Link to='/about'>about</Link></li>
+                </ul>
             </div>
         )
     }
