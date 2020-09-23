@@ -1,14 +1,26 @@
 const path = require('path');
 const HtmlWebpackPlugin = require('html-webpack-plugin');
 const { CleanWebpackPlugin } = require('clean-webpack-plugin');
+const MiniCssExtractPlugin = require('mini-css-extract-plugin');
+
+const DEV = process.env.NODE_ENV === 'development';
+const SplitConfig = DEV ? require('./scripts/dev.config') : require('./scripts/prod.config');
+
+const miniCssLoader = {
+    loader: MiniCssExtractPlugin.loader,
+    options: {
+        hmr: DEV,
+    },
+};
 
 module.exports = {
-    entry: './src/index.tsx',
+    entry: './src/index.js',
     output: {
-        filename: '[name].bould.js',
+        ...SplitConfig.output,
         path: path.resolve(__dirname, 'dist'),
-        publicPath: '/'
     },
+    mode: SplitConfig.mode,
+    devtool: SplitConfig.devtool,
     module: {
         rules: [
             {
@@ -24,8 +36,10 @@ module.exports = {
             {
                 test: /\.css$/,
                 use: [
-                    'style-loader',
-                    'css-loader'
+                    miniCssLoader,
+                    {
+                        loader: 'css-loader',
+                    },
                 ]
             },
             {
@@ -47,6 +61,7 @@ module.exports = {
         new CleanWebpackPlugin(),
         new HtmlWebpackPlugin({
             template: './src/index.html',
-        })
+        }),
+        ...SplitConfig.plugins,
     ]
 }
