@@ -2,6 +2,7 @@ const path = require('path');
 const HtmlWebpackPlugin = require('html-webpack-plugin');
 const { CleanWebpackPlugin } = require('clean-webpack-plugin');
 const MiniCssExtractPlugin = require('mini-css-extract-plugin');
+const TsConfigPathsPlugin = require('tsconfig-paths-webpack-plugin');
 
 const DEV = process.env.NODE_ENV === 'development';
 const SplitConfig = DEV ? require('./scripts/dev.config') : require('./scripts/prod.config');
@@ -14,24 +15,53 @@ const miniCssLoader = {
 };
 
 module.exports = {
-    entry: './src/index.js',
+    entry: './src/index.tsx',
     output: {
         ...SplitConfig.output,
         path: path.resolve(__dirname, 'dist'),
     },
     mode: SplitConfig.mode,
-    devtool: SplitConfig.devtool,
+    devServer: {
+        contentBase: path.join(__dirname, 'dist'),
+        port: 9000,
+        publicPath: '/',
+        historyApiFallback: true,
+    },
     module: {
         rules: [
             {
-                test: /\.(js|jsx|mjs)$/,
-                use: 'babel-loader',
-                exclude: /node_modules/
+                test: /\.(tsx?|d.ts)$/,
+                include: [
+                    path.resolve(__dirname, 'src'),
+                ],
+                use: [
+                    {
+                        loader: 'awesome-typescript-loader',
+                        options: {
+                            transpileOnly: false,
+                        },
+                    },
+                ],
+                exclude: /node_modules/,
             },
             {
-                test: /\.(tsx?|d.ts)$/,
-                use: 'ts-loader',
-                exclude: /node_modules/,
+                test: /\.(js|jsx|mjs)$/,
+                include: [
+                    path.resolve(__dirname, 'src'),
+                ],
+                use: [
+                    'thread-loader',
+                    {
+                        loader: 'babel-loader',
+                        options: {
+                            cacheDirectory: path.resolve(__dirname, './.cache/.babel'),
+                            cacheCompression: false,
+                            compact: false,
+                            configFile: path.resolve(__dirname, '.babelrc'),
+                        },
+                    },
+                ],
+                exclude: /node_modules/
             },
             {
                 test: /\.css$/,
@@ -49,13 +79,20 @@ module.exports = {
         ]
     },
     resolve: {
-        extensions: [ '.tsx', '.ts', '.js' ],
-    },
-    devServer: {
-        contentBase: path.join(__dirname, 'dist'),
-        port: 9000,
-        publicPath: '/',
-        historyApiFallback: true,
+        extensions: ['.ts', '.tsx', '.js', '.jsx'],
+        modules: [
+            'node_modules',
+            path.resolve(__dirname, 'src'),
+        ],
+        plugins: [
+            new TsConfigPathsPlugin({
+                configFile: path.resolve(__dirname, './tsconfig.json'),
+                extensions: ['.ts', '.tsx', '.js', '.jsx'],
+                logLevel: 'INFO',
+                baseUrl: path.resolve(__dirname, '.'),
+                mainFields: ['browser', 'main'],
+            })
+        ]
     },
     plugins: [
         new CleanWebpackPlugin(),

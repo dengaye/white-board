@@ -1,0 +1,7 @@
+node_modules/
+/build/
+/dist/
+scripts
+webpack.config.js
+**/*.spec.js
+.eslintrc

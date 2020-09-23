@@ -10,10 +10,10 @@ module.exports = {
   mode: 'production',
   devtool: false,
   plugins: [
-    new MiniCssExtractPlugin({
+    new MiniCssExtactPlugin({
         filename: '[name]-[chunkhash:8].css',
         chunkFilename: '[name]-[chunkhash:8].css',
         ignoreOrder: false,
     }),
-  ]
+  ],
 }

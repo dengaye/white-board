@@ -22,5 +22,5 @@ module.exports = {
       chunkFilename: '[name].css',
       ignoreOrder: false,
     })
-  ]
+  ],
 }
