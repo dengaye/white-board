@@ -21,6 +21,6 @@ module.exports = {
       fileName: '[name].css',
       chunkFilename: '[name].css',
       ignoreOrder: false,
-    })
+    }),
   ],
-}
+};

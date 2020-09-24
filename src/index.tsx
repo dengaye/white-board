@@ -8,10 +8,10 @@ import About from './pages/about';
 import Home from './pages/home';
 
 ReactDom.render(
-    <BrowserRouter>
-        <Route path='/' component={App} />
-        <Route path='/about' component={About} />
-        <Route path='/home' component={Home} />
-    </BrowserRouter>,
-    document.getElementById('root'),
-)
+  <BrowserRouter>
+    <Route path='/' component={App} />
+    <Route path='/about' component={About} />
+    <Route path='/home' component={Home} />
+  </BrowserRouter>,
+  document.getElementById('root')
+);
