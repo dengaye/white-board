@@ -1,5 +1,7 @@
 const webpack = require('webpack');
+const path = require('path');
 const MiniCssExtactPlugin = require('mini-css-extract-plugin');
+const StyleLintPlugin = require('stylelint-webpack-plugin');
 
 module.exports = {
   output: {
@@ -17,6 +19,13 @@ module.exports = {
   // },
   plugins: [
     new webpack.HotModuleReplacementPlugin(),
+    new StyleLintPlugin({
+      configFile: path.resolve(__dirname, '../stylelint.config.js'),
+      context: path.resolve(__dirname, '../src', ''),
+      failOnError: true,
+      quiet: false,
+      lintDirtyModulesOnly: true,
+    }),
     new MiniCssExtactPlugin({
       fileName: '[name].css',
       chunkFilename: '[name].css',

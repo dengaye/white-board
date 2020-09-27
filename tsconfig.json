@@ -11,6 +11,7 @@
     "rootDir": "src",
     "noImplicitReturns": true,
     "noImplicitThis": true,
+
     "noImplicitAny": true,
     "strictNullChecks": true,
     "experimentalDecorators": true,

@@ -14,6 +14,25 @@ const miniCssLoader = {
   },
 };
 
+const postCssLoader = {
+  loader: 'postcss-loader',
+  options: {
+    postcssOptions: {
+      plugins: [
+        [
+          'postcss-flexbugs-fixes', {}
+        ],
+        [
+          'postcss-preset-env',
+          {
+            flexbox: 'no-2009',
+          }
+        ],
+      ]
+    }
+  }
+}
+
 module.exports = {
   entry: './src/index.tsx',
   output: {
@@ -62,12 +81,33 @@ module.exports = {
         exclude: /node_modules/,
       },
       {
+        test: /\.scss$/,
+        use: [
+          miniCssLoader,
+          {
+            loader: 'css-loader',
+            options: {
+                modules: {
+                    localIdentName: '[local]-[hash:base64:10]',
+                },
+                localsConvention: 'camelCase',
+                importLoaders: 2,
+            },
+          },
+          postCssLoader,
+          {
+            loader: 'sass-loader',
+          },
+        ]
+      },
+      {
         test: /\.css$/,
         use: [
           miniCssLoader,
           {
             loader: 'css-loader',
           },
+          postCssLoader,
         ],
       },
       {

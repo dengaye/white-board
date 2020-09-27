@@ -2,7 +2,12 @@
   "parser": "@typescript-eslint/parser",
   "parserOptions": {
     "project": ["tsconfig.json"],
-    "projectFolderIgnoreList": ["node_modules", "dist", "build", "**/*.md"]
+    "projectFolderIgnoreList": ["node_modules", "dist", "build"],
+    "ecmaVersion": 2018,
+    "sourceType": "module",
+    "ecmaFeatures": {
+      "jsx": true
+    }
   },
   "plugins": ["@typescript-eslint", "jsdoc", "import", "prettier", "react-hooks"],
   "extends": [
@@ -92,6 +97,8 @@
     "jsdoc/check-alignment": "error",
 
     "react/jsx-no-target-blank": 0,
+    // https://github.com/facebook/react/tree/master/packages/eslint-plugin-react-hooks
+    "react-hooks/rules-of-hooks": "error",
 
     "constructor-super": "error",
     "dot-notation": "error",
