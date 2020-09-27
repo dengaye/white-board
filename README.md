@@ -1,13 +1,11 @@
-# react-app
-
-react + webpack
+> react + webpack
 
 ## dev
 
 ```
 yarn install
 
-yarn run start
+yarn run dev
 ```
 
 ## build

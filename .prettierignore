@@ -4,4 +4,3 @@ node_modules/
 scripts
 webpack.config.js
 .eslintrc
-**/*.md
