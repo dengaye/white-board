@@ -7,7 +7,6 @@ module.exports = {
   extends: 'stylelint-config-standard',
   plugins: ['stylelint-scss'],
   rules: {
-    indentation: 4,
     'string-quotes': 'single',
     'function-name-case': null,
     'at-rule-no-unknown': null,
@@ -18,6 +17,7 @@ module.exports = {
         ignorePseudoClasses: ['global', 'local'],
       },
     ],
+    indentation: 2,
     'declaration-empty-line-before': null,
     'at-rule-empty-line-before': null,
     'no-descending-specificity': null,
