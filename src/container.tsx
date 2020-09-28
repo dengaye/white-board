@@ -1,9 +1,13 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
 
-class App extends React.Component {
-  render() {
-    return (
+interface InterAppProps {
+  children: React.ReactNode;
+}
+
+export default function Container(props: InterAppProps) {
+  return (
+    <>
       <div>
         <ul>
           <li>
@@ -13,9 +17,8 @@ class App extends React.Component {
             <Link to='/about'>about</Link>
           </li>
         </ul>
+        {props.children}
       </div>
-    );
-  }
+    </>
+  );
 }
-
-export default App;
