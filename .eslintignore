@@ -1,0 +1,8 @@
+node_modules/
+/build/
+/dist/
+scripts
+webpack.config.js
+.eslintrc
+stylelint.config.js
+README.md
