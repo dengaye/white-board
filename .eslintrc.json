@@ -27,12 +27,6 @@
         "filter": { "regex": "^(__String|[A-Za-z]+_[A-Za-z]+)$", "match": false }
       },
       {
-        "selector": "interface",
-        "format": ["PascalCase"],
-        "custom": { "regex": "^I[A-Z]", "match": false },
-        "filter": { "regex": "^I(Arguments|TextWriter|O([A-Z][a-z]+[A-Za-z]*)?)$", "match": false }
-      },
-      {
         "selector": "variable",
         "format": ["camelCase", "PascalCase", "UPPER_CASE"],
         "leadingUnderscore": "allow",
@@ -76,7 +70,13 @@
     "@typescript-eslint/explicit-function-return-type": "off",
     "@typescript-eslint/explicit-module-boundary-types": "off",
     "@typescript-eslint/consistent-type-definitions": ["error", "interface"],
-    "@typescript-eslint/no-inferrable-types": "error",
+    "@typescript-eslint/interface-name-prefix": 0,
+    "@typescript-eslint/no-inferrable-types": [
+      "error",
+      {
+        "ignoreProperties": true
+      }
+    ],
     "no-duplicate-case": "error",
     "curly": ["error", "multi-line"],
     "quotes": "off",
@@ -88,6 +88,7 @@
         "avoidEscape": true
       }
     ],
+    "@typescript-eslint/no-explicit-any": "off",
 
     "jsdoc/check-alignment": "error",
 
@@ -145,14 +146,14 @@
     "react": {
       "version": "16.13.1"
     }
-  },
-  "overrides": [
-    {
-      // enable the rule specifically for TypeScript files
-      "files": ["*.js", "*.ts"],
-      "rules": {
-        "@typescript-eslint/explicit-module-boundary-types": "warn"
-      }
-    }
-  ]
+  }
+  // "overrides": [
+  //   {
+  //     // enable the rule specifically for TypeScript files
+  //     "files": ["*.js", "*.ts"],
+  //     "rules": {
+  //       // "@typescript-eslint/explicit-module-boundary-types": "warn"
+  //     }
+  //   }
+  // ]
 }

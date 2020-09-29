@@ -1,0 +1,15 @@
+.left-feature-container {
+  position: fixed;
+  top: 55px;
+  width: 60px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.delete {
+  width: 20px;
+  height: 30px;
+  border: 1px solid #455166;
+  border-radius: 0 0 5px 5px;
+}
