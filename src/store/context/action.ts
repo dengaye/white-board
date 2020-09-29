@@ -20,6 +20,11 @@ export const setLintWidth = (payload: string) => ({
   payload,
 });
 
+export const setDrawMode = (payload: string) => ({
+  type: ACTIONS.SET_MODE_TYPE,
+  payload,
+});
+
 export default {
   ...ACTIONS,
 };

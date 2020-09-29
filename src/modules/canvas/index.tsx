@@ -34,7 +34,7 @@ const CanvasContainer = () => {
       NewControl.update(store);
       NewControl.update(store);
     }
-  }, [store.brushColor, store.lineWidth]);
+  }, [store.brushColor, store.lineWidth, store.modeType]);
 
   return <canvas id='canvas'></canvas>;
 };

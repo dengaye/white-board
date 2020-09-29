@@ -3,4 +3,5 @@ export interface InterStore {
   context: any;
   brushColor: string;
   lineWidth: number | string;
+  modeType: string;
 }

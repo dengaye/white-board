@@ -1,13 +1,13 @@
 import React, { useContext } from 'react';
 
 import AppContext from '@src/store/context/index';
-import { setBrushColor, setLintWidth } from '@store/context/action';
-import { BRUSH_COLORS, BRUSH_SIZES } from '@src/contants';
+import { setBrushColor, setLintWidth, setDrawMode } from '@store/context/action';
+import { BRUSH_COLORS, BRUSH_SIZES, MODE_TYPES } from '@src/contants';
 
 import style from './style.module.scss';
 
 const Brush = () => {
-  const { dispatch } = useContext(AppContext);
+  const { dispatch, store } = useContext(AppContext);
 
   const handleBrushs = (e: any) => {
     const targetAttrubute = e.target.getAttribute('data-color');
@@ -17,6 +17,7 @@ const Brush = () => {
         allChild[i].setAttribute('class', '');
       }
       e.target.setAttribute('class', style.active);
+      dispatch(setDrawMode(MODE_TYPES.BRUSH));
       dispatch(setBrushColor(targetAttrubute));
     }
   };
@@ -37,7 +38,13 @@ const Brush = () => {
     <div className={style.brushContainer}>
       <div className={style.brushContent} onClick={handleBrushs}>
         {BRUSH_COLORS.map((item: string, index: number) => (
-          <div key={index} data-color={item} className={index === 0 ? style.active : ''}></div>
+          <div
+            key={index}
+            data-color={item}
+            className={
+              store.brushColor === item && store.modeType === MODE_TYPES.BRUSH ? style.active : ''
+            }
+          ></div>
         ))}
       </div>
       <div className={style.brushSize} onClick={handleBrushSize}>

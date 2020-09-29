@@ -1,8 +1,11 @@
+import { MODE_TYPES } from '@src/contants';
+
 class Controls {
   canvas: any;
   context: any;
   brushColor: string;
-  lineWidth: number | string;
+  lineWidth: number;
+  modeType: string;
   prevX: number = 0;
   prevY: number = 0;
   currX: number = 0;
@@ -12,14 +15,15 @@ class Controls {
   constructor(props: any) {
     this.canvas = props.canvas;
     this.context = props.context;
-    this.brushColor = props.brushColor;
-    this.lineWidth = props.lineWidth;
+    this.update(props);
   }
 
   update = (props: any) => {
     this.brushColor = props.brushColor;
     this.lineWidth = props.lineWidth;
+    this.modeType = props.modeType;
   };
+
   init = (props: any) => {
     this.canvas = props.canvas;
     this.context = props.context;
@@ -44,7 +48,13 @@ class Controls {
       this.prevY = this.currY;
       this.currX = e.clientX - this.canvas.offsetLeft;
       this.currY = e.clientY - this.canvas.offsetTop;
-      this.draw();
+      if (this.modeType === MODE_TYPES.BRUSH) {
+        this.drawLine();
+      }
+
+      if (this.modeType === MODE_TYPES.ERASER) {
+        this.clearByModeType();
+      }
     }
   };
 
@@ -52,7 +62,7 @@ class Controls {
     this.flag = false;
   };
 
-  draw = () => {
+  drawLine = () => {
     const { context, brushColor, lineWidth } = this;
     const { prevX, prevY, currX, currY } = this;
     context.beginPath();
@@ -63,6 +73,13 @@ class Controls {
     context.stroke();
     context.closePath();
   };
+
+  clearByModeType() {
+    const { context, lineWidth } = this;
+    const { currX, currY } = this;
+    const n = lineWidth / 2;
+    context.clearRect(currX - n, currY - n, lineWidth, lineWidth);
+  }
 }
 
 export default Controls;

@@ -5,6 +5,7 @@
   display: flex;
   align-items: center;
   justify-content: center;
+  flex-direction: column;
 }
 
 .delete {
@@ -12,4 +13,18 @@
   height: 30px;
   border: 1px solid #455166;
   border-radius: 0 0 5px 5px;
+}
+
+.eraser {
+  width: 20px;
+  height: 15px;
+  border: 1px solid #455166;
+  margin-top: 20px;
+  box-shadow: 2px 1px 2px 1px rgba(0, 0, 0, 0.2);
+  border-radius: 2px;
+  transform: all 0.3;
+
+  &.active {
+    box-shadow: 2px 4px 2px 1px rgba(0, 0, 0, 0.2);
+  }
 }
