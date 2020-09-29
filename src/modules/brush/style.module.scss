@@ -3,12 +3,13 @@
   position: fixed;
   bottom: 0;
   width: 100%;
+  height: 45px;
 }
 
 .brush-content {
   display: flex;
   margin-left: 20px;
-  align-items: baseline;
+  align-items: flex-end;
 
   div {
     width: 25px;
@@ -25,8 +26,66 @@
       background-color: red;
     }
 
+    &:nth-of-type(3) {
+      background-color: blue;
+    }
+
     &.active {
       height: 45px;
+    }
+  }
+}
+
+.brush-size {
+  display: flex;
+  align-items: center;
+  margin-left: 10px;
+  transition: all 0.3s;
+
+  span {
+    display: inline-block;
+    border-radius: 50%;
+    border: 1px solid #202d40;
+    pointer-events: none;
+
+    &.active {
+      background-color: #202d40;
+    }
+  }
+
+  div {
+    width: 25px;
+    height: 25px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    &.active {
+      span {
+        background-color: #202d40;
+      }
+    }
+
+    &:nth-of-type(1) {
+      span {
+        width: 6px;
+        height: 6px;
+      }
+    }
+
+    &:nth-of-type(2) {
+      span {
+        width: 10px;
+        height: 10px;
+      }
+      margin-right: 8px;
+    }
+
+    &:nth-of-type(3) {
+      span {
+        width: 20px;
+        height: 20px;
+      }
     }
   }
 }

@@ -15,6 +15,11 @@ export const setBrushColor = (payload: string) => ({
   payload,
 });
 
+export const setLintWidth = (payload: string) => ({
+  type: ACTIONS.SET_LINE_WIDTH,
+  payload,
+});
+
 export default {
   ...ACTIONS,
 };
