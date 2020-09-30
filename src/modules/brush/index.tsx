@@ -3,6 +3,7 @@ import React, { useContext } from 'react';
 import AppContext from '@src/store/context/index';
 import { setBrushColor, setLintWidth, setDrawMode } from '@store/context/action';
 import { BRUSH_COLORS, BRUSH_SIZES, MODE_TYPES } from '@src/contants';
+import SaveImage from './save-image';
 
 import style from './style.module.scss';
 
@@ -54,6 +55,7 @@ const Brush = () => {
           </div>
         ))}
       </div>
+      <SaveImage />
     </div>
   );
 };
