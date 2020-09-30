@@ -17,6 +17,22 @@ module.exports = {
   //     chunks: 'all',
   //   }
   // },
+  devServer: {
+    contentBase: path.join(__dirname, 'dist'),
+    host: process.env.HOST || '0.0.0.0',
+    port: process.env.PORT || 9000,
+    sockHost: process.env.SOCK_HOST || '0.0.0.0',
+    sockPort: process.env.SOCK_PORT || 9000,
+    disableHostCheck: true,
+    historyApiFallback: true,
+    liveReload: true,
+    hot: true,
+    writeToDisk: true,
+    publicPath: '/',
+    headers: {
+        "Access-Control-Allow-Origin": "*",
+    },
+  },
   plugins: [
     new webpack.HotModuleReplacementPlugin(),
     new StyleLintPlugin({

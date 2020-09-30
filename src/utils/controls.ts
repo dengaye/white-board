@@ -1,4 +1,5 @@
 import { MODE_TYPES } from '@src/contants';
+import { touchable } from '@util/util';
 
 class Controls {
   canvas: any;
@@ -28,17 +29,32 @@ class Controls {
     this.canvas = props.canvas;
     this.context = props.context;
     this.update(props);
-    props.canvas.addEventListener('mousedown', this.handleDown);
-    props.canvas.addEventListener('mousemove', this.handleMove);
-    props.canvas.addEventListener('mouseup', this.handleUp);
-    props.canvas.addEventListener('mouseout', this.handleUp);
+    if (touchable) {
+      props.canvas.addEventListener('touchstart', this.handleDown);
+      props.canvas.addEventListener('touchmove', this.handleMove);
+      props.canvas.addEventListener('touchend', this.handleUp);
+    } else {
+      props.canvas.addEventListener('mousedown', this.handleDown);
+      props.canvas.addEventListener('mousemove', this.handleMove);
+      props.canvas.addEventListener('mouseup', this.handleUp);
+      props.canvas.addEventListener('mouseout', this.handleUp);
+    }
   };
 
   handleDown = (e: any) => {
     this.prevX = this.currX;
     this.prevY = this.currY;
-    this.currX = e.clientX - this.canvas.offsetLeft;
-    this.currY = e.clientY - this.canvas.offsetTop;
+    let x = 0;
+    let y = 0;
+    if (e.changedTouches) {
+      x = e.changedTouches[0].clientX;
+      y = e.changedTouches[0].clientY;
+    } else {
+      x = e.clientX;
+      y = e.clientY;
+    }
+    this.currX = x - this.canvas.offsetLeft;
+    this.currY = y - this.canvas.offsetTop;
     this.flag = true;
   };
 
@@ -46,8 +62,17 @@ class Controls {
     if (this.flag) {
       this.prevX = this.currX;
       this.prevY = this.currY;
-      this.currX = e.clientX - this.canvas.offsetLeft;
-      this.currY = e.clientY - this.canvas.offsetTop;
+      let x = 0;
+      let y = 0;
+      if (e.touches) {
+        x = e.touches[0].clientX;
+        y = e.touches[0].clientY;
+      } else {
+        x = e.clientX;
+        y = e.clientY;
+      }
+      this.currX = x - this.canvas.offsetLeft;
+      this.currY = y - this.canvas.offsetTop;
       if (this.modeType === MODE_TYPES.BRUSH) {
         this.drawLine();
       }

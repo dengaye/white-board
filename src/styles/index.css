@@ -1,6 +1,7 @@
 * {
   padding: 0;
   margin: 0;
+  -webkit-tap-highlight-color: transparent;
 }
 
 body {
@@ -15,4 +16,6 @@ body,
 #root {
   width: 100%;
   height: 100%;
+  overflow: hidden;
+  user-select: none;
 }

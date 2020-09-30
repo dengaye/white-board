@@ -40,12 +40,7 @@ module.exports = {
     path: path.resolve(__dirname, 'dist'),
   },
   mode: SplitConfig.mode,
-  devServer: {
-    contentBase: path.join(__dirname, 'dist'),
-    port: 9000,
-    publicPath: '/',
-    historyApiFallback: true,
-  },
+  devServer: SplitConfig.devServer,
   module: {
     rules: [
       {
