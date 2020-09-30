@@ -3,6 +3,8 @@ import React, { useContext } from 'react';
 import AppContext from '@src/store/context/index';
 import { downloadFile } from '@util/util';
 
+import DownloadSvg from '@image/download.svg';
+
 import style from './style.module.scss';
 
 const saveImage = () => {
@@ -17,7 +19,7 @@ const saveImage = () => {
 
   return (
     <div className={style.saveImage} onClick={handleDownload}>
-      Download
+      <img src={DownloadSvg} />
     </div>
   );
 };

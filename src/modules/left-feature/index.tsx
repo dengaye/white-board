@@ -3,6 +3,8 @@ import React, { useContext } from 'react';
 import AppContext from '@store/context/index';
 import { setDrawMode } from '@store/context/action';
 import { MODE_TYPES } from '@src/contants';
+import DeleteSvg from '@image/delete.svg';
+import EraserSvg from '@image/eraser.svg';
 
 import style from './style.module.scss';
 
@@ -31,11 +33,12 @@ const LeftFeature = () => {
 
   return (
     <div className={style.leftFeatureContainer}>
-      <div className={style.delete} onClick={handleClear}></div>
-      <div
-        className={`${style.eraser} ${isEraser() ? style.active : ''}`}
-        onClick={handleEraser}
-      ></div>
+      <div className={style.delete} onClick={handleClear}>
+        <img src={DeleteSvg} alt='delete' />
+      </div>
+      <div className={`${style.eraser} ${isEraser() ? style.active : ''}`} onClick={handleEraser}>
+        <img src={EraserSvg} alt='eraser' />
+      </div>
     </div>
   );
 };

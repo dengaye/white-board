@@ -11,20 +11,25 @@
 .delete {
   width: 20px;
   height: 30px;
-  border: 1px solid #455166;
-  border-radius: 0 0 5px 5px;
+
+  img {
+    width: 100%;
+  }
 }
 
 .eraser {
-  width: 20px;
-  height: 15px;
-  border: 1px solid #455166;
+  width: 24px;
   margin-top: 20px;
-  box-shadow: 2px 1px 2px 1px rgba(0, 0, 0, 0.2);
   border-radius: 2px;
-  transform: all 0.3;
+  transform: all 0.3s;
+  text-align: center;
+
+  img {
+    width: 20px;
+    vertical-align: middle;
+  }
 
   &.active {
-    box-shadow: 2px 4px 2px 1px rgba(0, 0, 0, 0.2);
+    box-shadow: 0 0 2px 1px rgba(0, 0, 0, 0.2);
   }
 }
