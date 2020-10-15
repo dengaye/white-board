@@ -21,7 +21,7 @@ module.exports = {
     new MiniCssExtactPlugin({
       filename: '[name]-[chunkhash:8].css',
       chunkFilename: '[name]-[chunkhash:8].css',
-      ignoreOrder: false,
+      ignoreOrder: true,
     }),
   ],
 };

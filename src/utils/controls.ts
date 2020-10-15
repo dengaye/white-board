@@ -12,6 +12,7 @@ class Controls {
   currX: number = 0;
   currY: number = 0;
   flag: boolean = false;
+  saveImageUrlToStore: any;
 
   constructor(props: any) {
     this.canvas = props.canvas;
@@ -28,6 +29,7 @@ class Controls {
   init = (props: any) => {
     this.canvas = props.canvas;
     this.context = props.context;
+    this.saveImageUrlToStore = props.saveImageUrlToStore;
     this.update(props);
     if (touchable) {
       props.canvas.addEventListener('touchstart', this.handleDown);
@@ -76,7 +78,6 @@ class Controls {
       if (this.modeType === MODE_TYPES.BRUSH) {
         this.drawLine();
       }
-
       if (this.modeType === MODE_TYPES.ERASER) {
         this.clearByModeType();
       }
@@ -84,6 +85,9 @@ class Controls {
   };
 
   handleUp = () => {
+    if (this.flag) {
+      this.saveImageUrlToStore(this.canvas.toDataURL());
+    }
     this.flag = false;
   };
 

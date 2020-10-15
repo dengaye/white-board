@@ -11,6 +11,12 @@
 .delete {
   width: 20px;
   height: 30px;
+  margin-bottom: 10px;
+
+  &.disable {
+    opacity: 0.5;
+    cursor: not-allowed;
+  }
 
   img {
     width: 100%;
@@ -19,9 +25,8 @@
 
 .eraser {
   width: 24px;
-  margin-top: 20px;
   border-radius: 2px;
-  transform: all 0.3s;
+  transform: all, 0.3s;
   text-align: center;
 
   img {

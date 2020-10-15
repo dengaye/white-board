@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg width="16px" height="16px" viewBox="0 0 16 16" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+	<title>
+		arrow left
+	</title>
+	<g>
+		<path d="M7.354 2.94L2.293 8l5.06 5.06a.5.5 0 00.708 0l.707-.706a.5.5 0 000-.708L6.123 9h7.084a.5.5 0 00.5-.5v-1a.5.5 0 00-.5-.5H6.122l2.646-2.646a.5.5 0 000-.708L8.06 2.94a.5.5 0 00-.707 0z">
+		</path>
+	</g>
+</svg>

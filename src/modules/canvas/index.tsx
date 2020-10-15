@@ -1,13 +1,18 @@
-import React, { useEffect, useContext, useState } from 'react';
+import React, { useEffect, useState } from 'react';
 
-import AppContext from '@src/store/context/index';
-import { setCanvasByAction, setContextByAction } from '@store/context/action';
 import Controls from '@util/controls';
+import { IStore } from '@src/type';
 
 const NewControl = new Controls({});
 
-const CanvasContainer = () => {
-  const { dispatch, store } = useContext(AppContext);
+interface ICanvasProps {
+  setCanvasContext: any;
+  setCanvas: any;
+  setCanvasHistory: any;
+}
+
+const CanvasContainer = (props: ICanvasProps & IStore) => {
+  const { canvas, canvasContext, canvasHistory } = props;
   const [isMount, setMount] = useState(false);
 
   useEffect(() => {
@@ -17,24 +22,33 @@ const CanvasContainer = () => {
     if (canvasDOM) {
       canvasDOM.width = window.innerWidth;
       canvasDOM.height = window.innerHeight;
-      dispatch(setCanvasByAction(canvasDOM));
-      dispatch(setContextByAction(context));
+      props.setCanvas(canvasDOM);
+      props.setCanvasContext(context);
     }
   }, []);
 
-  useEffect(() => {
-    if (store.canvas && !isMount) {
-      setMount(true);
-      NewControl.init(store);
-    }
-  }, [store]);
+  const saveImageUrlToStore = (dataUrl: string) => {
+    canvasHistory.push(dataUrl);
+    props.setCanvasHistory(canvasHistory);
+  };
 
   useEffect(() => {
-    if (store.canvas && isMount) {
-      NewControl.update(store);
-      NewControl.update(store);
+    if (canvas && !isMount) {
+      setMount(true);
+      NewControl.init({
+        ...props,
+        context: canvasContext,
+        saveImageUrlToStore,
+      });
     }
-  }, [store.brushColor, store.lineWidth, store.modeType]);
+  }, [canvas]);
+
+  useEffect(() => {
+    if (props.canvas && isMount) {
+      NewControl.update(props);
+      NewControl.update(props);
+    }
+  }, [props.brushColor, props.lineWidth, props.modeType]);
 
   return <canvas id='canvas'></canvas>;
 };

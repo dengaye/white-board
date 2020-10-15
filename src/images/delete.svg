@@ -1,25 +1,10 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <svg width="16px" height="16px" viewBox="0 0 16 16" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
-    <!-- Generator: Sketch 60 (88103) - https://sketch.com -->
-    <title>case-action/delete-red</title>
-    <desc>Created with Sketch.</desc>
-    <g id="代码" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd" stroke-linejoin="round">
-        <g id="icon" transform="translate(-187.000000, -200.000000)" stroke="#202D40" stroke-width="1.5">
-            <g id="编组-10" transform="translate(187.000000, 200.000000)">
-                <g id="编组-11">
-                    <g id="icons/more-dots">
-                        <g id="case-action/delete-red">
-                            <g id="trash-simple" transform="translate(2.000000, 2.000000)">
-                                <polyline id="路径" points="10.3636364 4.36363636 10.3636364 12 1.63636364 12 1.63636364 4.36363636"></polyline>
-                                <line x1="0.5" y1="2.68181818" x2="11.5" y2="2.68181818" id="路径" stroke-linecap="round"></line>
-                                <polyline id="路径" points="3.5 2.68181818 3.5 4.31441499e-13 8.36363636 2.20268248e-13 8.36363636 2.68181818"></polyline>
-                                <line x1="4.77272727" y1="6" x2="4.77272727" y2="9.27272727" id="路径"></line>
-                                <line x1="7.63636364" y1="6" x2="7.63636364" y2="9.27272727" id="路径"></line>
-                            </g>
-                        </g>
-                    </g>
-                </g>
-            </g>
-        </g>
-    </g>
+	<title>
+		delete
+	</title>
+	<g>
+		<path d="M9.5 3h-3v1h-2V2a1 1 0 011-1h5a1 1 0 011 1v2H14a.5.5 0 01.5.5v1a.5.5 0 01-.5.5h-.5v8a1 1 0 01-1 1h-9a1 1 0 01-1-1V6H2a.5.5 0 01-.5-.5v-1A.5.5 0 012 4h7.5V3zm2 3h-7v7h7V6zM7 7.5a.5.5 0 01.5.5v3a.5.5 0 01-.5.5H6a.5.5 0 01-.5-.5V8a.5.5 0 01.5-.5h1zm3 0a.5.5 0 01.5.5v3a.5.5 0 01-.5.5H9a.5.5 0 01-.5-.5V8a.5.5 0 01.5-.5h1z">
+		</path>
+	</g>
 </svg>
