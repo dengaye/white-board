@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 
 import CanvasContainer from './modules/canvas';
 import Brush from './modules/brush';
@@ -11,8 +11,8 @@ export default function Container() {
   const [brushColor, setBrushColor] = useState(BRUSH_COLORS[0]);
   const [lineWidth, setLineWidth] = useState(BRUSH_SIZES[0]);
   const [modeType, setModeType] = useState(MODE_TYPES.BRUSH);
-  const [canvasHistory, setCanvasHistory] = useState([]);
-  const [canvasHistoryOfReconvery, setCanvasHistoryOfReconvery] = useState([]);
+  const [canvasHistory, setCanvasHistory] = useState([] as any);
+  const [canvasHistoryOfReconvery, setCanvasHistoryOfReconvery] = useState([] as any);
 
   const store = {
     canvas,
@@ -32,7 +32,9 @@ export default function Container() {
         }}
         setCanvas={setCanvas}
         setCanvasContext={setCanvasContext}
-        setCanvasHistory={setCanvasHistory}
+        setCanvasHistory={(data: any) => {
+          setCanvasHistory([...data]);
+        }}
       />
       <Brush
         {...{
@@ -47,8 +49,12 @@ export default function Container() {
           ...store,
         }}
         setModeType={setModeType}
-        setCanvasHistory={setCanvasHistory}
-        setCanvasHistoryOfReconvery={setCanvasHistoryOfReconvery}
+        setCanvasHistory={(data: any) => {
+          setCanvasHistory([...data]);
+        }}
+        setCanvasHistoryOfReconvery={(data: any) => {
+          setCanvasHistoryOfReconvery([...data]);
+        }}
       />
     </div>
   );

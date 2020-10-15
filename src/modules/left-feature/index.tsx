@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 
 import { MODE_TYPES } from '@src/contants';
 import DeleteSvg from '@image/delete.svg';
@@ -78,10 +78,16 @@ const LeftFeature = (props: ILeftFeature & IStore) => {
       <div className={style.delete} onClick={handleClear}>
         <img src={DeleteSvg} alt='delete' />
       </div>
-      <div className={style.delete} onClick={handleRestore}>
+      <div
+        className={`${style.delete} ${canvasHistory?.length ? '' : style.disabled}`}
+        onClick={handleRestore}
+      >
         <img src={ArrowLeftSvg} alt='revoke' />
       </div>
-      <div className={style.delete} onClick={handleReconvery}>
+      <div
+        className={`${style.delete} ${canvasHistoryOfReconvery?.length ? '' : style.disabled}`}
+        onClick={handleReconvery}
+      >
         <img src={ArrowRightSvg} alt='reconvery' />
       </div>
       <div className={`${style.eraser} ${isEraser() ? style.active : ''}`} onClick={handleEraser}>
