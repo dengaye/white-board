@@ -99,6 +99,7 @@ class Controls {
     context.lineTo(currX, currY);
     context.strokeStyle = brushColor;
     context.lineWidth = lineWidth;
+    context.lineCap = 'round';
     context.stroke();
     context.closePath();
   };
