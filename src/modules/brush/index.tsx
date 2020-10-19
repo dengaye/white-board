@@ -1,7 +1,6 @@
 import React from 'react';
 
 import { BRUSH_COLORS, BRUSH_SIZES, MODE_TYPES } from '@src/contants';
-import SaveImage from './save-image';
 import { IStore } from '@src/type';
 
 import style from './style.module.scss';
@@ -13,8 +12,6 @@ interface IBrushProps {
 }
 
 const Brush = (props: IBrushProps & IStore) => {
-  const { canvas } = props;
-
   const handleBrushClick = (color: string) => {
     props.setBrushColor(color);
     props.setModeType(MODE_TYPES.BRUSH);
@@ -50,7 +47,6 @@ const Brush = (props: IBrushProps & IStore) => {
           </div>
         ))}
       </div>
-      <SaveImage canvas={canvas} />
     </div>
   );
 };

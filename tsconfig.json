@@ -21,7 +21,8 @@
       "@store/*": ["src/store/*"],
       "@module/*": ["src/modules/*"],
       "@util/*": ["src/utils/*"],
-      "@image/*": ["src/images/*"]
+      "@image/*": ["src/images/*"],
+      "@component/*": ["src/components/*"]
     },
     "resolveJsonModule": true,
     "esModuleInterop": true

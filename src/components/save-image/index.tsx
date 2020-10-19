@@ -7,6 +7,7 @@ import style from './style.module.scss';
 
 interface ISaveImage {
   canvas: any;
+  className?: string;
 }
 
 const saveImage = (props: ISaveImage) => {
@@ -20,7 +21,7 @@ const saveImage = (props: ISaveImage) => {
   };
 
   return (
-    <div className={style.saveImage} onClick={handleDownload}>
+    <div className={`${style.saveImage} ${props.className}`} onClick={handleDownload}>
       <img src={DownloadSvg} />
     </div>
   );

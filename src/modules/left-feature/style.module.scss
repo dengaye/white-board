@@ -6,9 +6,15 @@
   align-items: center;
   justify-content: center;
   flex-direction: column;
+
+  .icon-wrap {
+    &:last-child {
+      margin-bottom: 0;
+    }
+  }
 }
 
-.delete {
+.icon-wrap {
   width: 20px;
   height: 30px;
   margin-bottom: 10px;
@@ -21,20 +27,21 @@
   img {
     width: 100%;
   }
+
+  &.active {
+    box-shadow: 0 0 2px 1px rgba(0, 0, 0, 0.2);
+  }
 }
 
 .eraser {
   width: 24px;
   border-radius: 2px;
+  height: 24px;
   transform: all, 0.3s;
   text-align: center;
 
   img {
     width: 20px;
     vertical-align: middle;
-  }
-
-  &.active {
-    box-shadow: 0 0 2px 1px rgba(0, 0, 0, 0.2);
   }
 }

@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react';
+import React from 'react';
 
 import { MODE_TYPES } from '@src/contants';
 import DeleteSvg from '@image/delete.svg';
@@ -6,6 +6,7 @@ import EraserSvg from '@image/eraser.svg';
 import { IStore } from '@src/type';
 import ArrowLeftSvg from '@image/arrow-left.svg';
 import ArrowRightSvg from '@image/arrow-right.svg';
+import SaveImage from '@component/save-image/index';
 
 import style from './style.module.scss';
 
@@ -75,22 +76,26 @@ const LeftFeature = (props: ILeftFeature & IStore) => {
 
   return (
     <div className={style.leftFeatureContainer}>
-      <div className={style.delete} onClick={handleClear}>
+      <div className={style.iconWrap} onClick={handleClear}>
         <img src={DeleteSvg} alt='delete' />
       </div>
       <div
-        className={`${style.delete} ${canvasHistory?.length ? '' : style.disabled}`}
+        className={`${style.iconWrap} ${canvasHistory?.length ? '' : style.disabled}`}
         onClick={handleRestore}
       >
         <img src={ArrowLeftSvg} alt='revoke' />
       </div>
       <div
-        className={`${style.delete} ${canvasHistoryOfReconvery?.length ? '' : style.disabled}`}
+        className={`${style.iconWrap} ${canvasHistoryOfReconvery?.length ? '' : style.disabled}`}
         onClick={handleReconvery}
       >
         <img src={ArrowRightSvg} alt='reconvery' />
       </div>
-      <div className={`${style.eraser} ${isEraser() ? style.active : ''}`} onClick={handleEraser}>
+      <SaveImage canvas={canvas} className={style.iconWrap} />
+      <div
+        className={`${style.iconWrap} ${style.eraser} ${isEraser() ? style.active : ''}`}
+        onClick={handleEraser}
+      >
         <img src={EraserSvg} alt='eraser' />
       </div>
     </div>
