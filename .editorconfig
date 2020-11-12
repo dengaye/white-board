@@ -15,3 +15,6 @@ indent_stype = tab
 
 [src/**.{js,jsx,ts,tsx}]
 indent_size = 2
+
+[*.md]
+max_line_length = 0

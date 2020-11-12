@@ -1,7 +1,18 @@
 {
   "root": true,
   "parser": "babel-eslint",
-  "plugins": ["@typescript-eslint", "jsdoc", "import", "prettier", "react-hooks", "html"],
+  "plugins": ["jsdoc", "import", "prettier", "react-hooks", "html"],
+  "extends": [
+    "eslint:recommended",
+    "plugin:@typescript-eslint/eslint-recommended",
+    "plugin:@typescript-eslint/recommended",
+    "plugin:react/recommended",
+    "prettier"
+  ],
+  "globals": {
+    "window": "readonly",
+    "require": "readonly"
+  },
   "env": {
     "browser": true,
     "commonjs": true,
@@ -11,47 +22,12 @@
   },
 
   "parserOptions": {
-    "ecmaVersion": 2018,
+    "ecmaVersion": 2019,
     "sourceType": "module",
     "ecmaFeatures": {
       "jsx": true
     }
   },
-
-  "overrides": [
-    {
-      // enable the rule specifically for TypeScript files
-      "files": ["*.js", "*.ts", "*.tsx"],
-      "parser": "@typescript-eslint/parser",
-      "parserOptions": {
-        "project": ["tsconfig.json"],
-        "ecmaVersion": 2018,
-        "sourceType": "module",
-        "ecmaFeatures": {
-          "jsx": true
-        },
-        "warnOnUnsupportedTypeScriptVersion": true
-      },
-      "extends": [
-        "eslint:recommended",
-        "plugin:@typescript-eslint/eslint-recommended",
-        "plugin:@typescript-eslint/recommended",
-        "plugin:react/recommended",
-        "prettier"
-      ],
-      "globals": {
-        "window": "readonly",
-        "require": "readonly"
-      },
-      "settings": {
-        "react": {
-          "version": "16.13.1"
-        }
-      }
-      // https://developer.aliyun.com/mirror/npm/package/@propelinc/eslint-plugin
-      // https://cn.eslint.org/docs/rules
-    }
-  ],
   "rules": {
     "@typescript-eslint/adjacent-overload-signatures": "error",
     "@typescript-eslint/array-type": "error",
@@ -63,15 +39,6 @@
         "selector": "typeLike",
         "format": ["PascalCase"],
         "filter": { "regex": "^(__String|[A-Za-z]+_[A-Za-z]+)$", "match": false }
-      },
-      {
-        "selector": "interface",
-        "format": ["PascalCase"],
-        "custom": { "regex": "^I[A-Z]", "match": false },
-        "filter": {
-          "regex": "^I(Arguments|TextWriter|O([A-Z][a-z]+[A-Za-z]*)?)$",
-          "match": false
-        }
       },
       {
         "selector": "variable",
@@ -179,5 +146,30 @@
     "space-in-parens": "error",
     "unicode-bom": ["error", "never"],
     "use-isnan": "error"
+  },
+  "overrides": [
+    {
+      // enable the rule specifically for TypeScript files
+      "files": ["**/*.ts?(x)"],
+      "parser": "@typescript-eslint/parser",
+      "plugins": ["@typescript-eslint"],
+      "parserOptions": {
+        "project": ["tsconfig.json"],
+        "ecmaVersion": 2018,
+        "sourceType": "module",
+        "ecmaFeatures": {
+          "jsx": true
+        },
+        "warnOnUnsupportedTypeScriptVersion": true
+      }
+
+      // https://developer.aliyun.com/mirror/npm/package/@propelinc/eslint-plugin
+      // https://cn.eslint.org/docs/rules
+    }
+  ],
+  "settings": {
+    "react": {
+      "version": "16.13.1"
+    }
   }
 }
