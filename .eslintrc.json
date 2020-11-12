@@ -145,7 +145,10 @@
     "quote-props": ["error", "consistent-as-needed"],
     "space-in-parens": "error",
     "unicode-bom": ["error", "never"],
-    "use-isnan": "error"
+    "use-isnan": "error",
+    "rules": {
+      "prettier/prettier": "error"
+    }
   },
   "overrides": [
     {
@@ -162,9 +165,9 @@
         },
         "warnOnUnsupportedTypeScriptVersion": true
       }
-
       // https://developer.aliyun.com/mirror/npm/package/@propelinc/eslint-plugin
       // https://cn.eslint.org/docs/rules
+      // prettier
     }
   ],
   "settings": {
