@@ -7,13 +7,5 @@
   "semi": true,
   "jsxSingleQuote": true,
   "bracketSpacing": true,
-  "jsxBracketSameLine": false,
-  "overrides": [
-    {
-      "files": "src/**/*.{js,jsx,ts,tsx}",
-      "options": {
-        "tabWidth": 2
-      }
-    }
-  ]
+  "jsxBracketSameLine": false
 }

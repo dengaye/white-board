@@ -1,10 +1,7 @@
 {
-  "parser": "@typescript-eslint/parser",
-  "parserOptions": {
-    "project": ["tsconfig.json"],
-    "projectFolderIgnoreList": ["node_modules", "dist", "build", "html"]
-  },
-  "plugins": ["@typescript-eslint", "jsdoc", "import", "prettier", "react-hooks"],
+  "root": true,
+  "parser": "babel-eslint",
+  "plugins": ["jsdoc", "import", "prettier", "react-hooks", "html"],
   "extends": [
     "eslint:recommended",
     "plugin:@typescript-eslint/eslint-recommended",
@@ -12,8 +9,25 @@
     "plugin:react/recommended",
     "prettier"
   ],
-  // https://developer.aliyun.com/mirror/npm/package/@propelinc/eslint-plugin
-  // https://cn.eslint.org/docs/rules
+  "globals": {
+    "window": "readonly",
+    "require": "readonly"
+  },
+  "env": {
+    "browser": true,
+    "commonjs": true,
+    "es6": true,
+    "jest": true,
+    "node": true
+  },
+
+  "parserOptions": {
+    "ecmaVersion": 2019,
+    "sourceType": "module",
+    "ecmaFeatures": {
+      "jsx": true
+    }
+  },
   "rules": {
     "@typescript-eslint/adjacent-overload-signatures": "error",
     "@typescript-eslint/array-type": "error",
@@ -93,6 +107,8 @@
     "jsdoc/check-alignment": "error",
 
     "react/jsx-no-target-blank": 0,
+    // https://github.com/facebook/react/tree/master/packages/eslint-plugin-react-hooks
+    "react-hooks/rules-of-hooks": "error",
 
     "constructor-super": "error",
     "dot-notation": "error",
@@ -136,24 +152,34 @@
     "quote-props": ["error", "consistent-as-needed"],
     "space-in-parens": "error",
     "unicode-bom": ["error", "never"],
-    "use-isnan": "error"
+    "use-isnan": "error",
+    "rules": {
+      "prettier/prettier": "error"
+    }
   },
-  "globals": {
-    "window": "readonly",
-    "require": "readonly"
-  },
+  "overrides": [
+    {
+      // enable the rule specifically for TypeScript files
+      "files": ["**/*.ts?(x)"],
+      "parser": "@typescript-eslint/parser",
+      "plugins": ["@typescript-eslint"],
+      "parserOptions": {
+        "project": ["tsconfig.json"],
+        "ecmaVersion": 2018,
+        "sourceType": "module",
+        "ecmaFeatures": {
+          "jsx": true
+        },
+        "warnOnUnsupportedTypeScriptVersion": true
+      }
+      // https://developer.aliyun.com/mirror/npm/package/@propelinc/eslint-plugin
+      // https://cn.eslint.org/docs/rules
+      // prettier
+    }
+  ],
   "settings": {
     "react": {
       "version": "16.13.1"
     }
   }
-  // "overrides": [
-  //   {
-  //     // enable the rule specifically for TypeScript files
-  //     "files": ["*.js", "*.ts"],
-  //     "rules": {
-  //       // "@typescript-eslint/explicit-module-boundary-types": "warn"
-  //     }
-  //   }
-  // ]
 }

@@ -5,5 +5,4 @@ scripts
 webpack.config.js
 .eslintrc
 stylelint.config.js
-README.md
 postcss.config.js
