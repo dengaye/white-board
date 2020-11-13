@@ -1,17 +1,7 @@
 # White Board
 
-## dev
+## Preview
 
-```
-yarn install
+![image](./doc/white-board.png)
 
-yarn run dev
-```
-
-## build
-
-```
-yarn install
-
-yarn run build
-```
+You can click on this link to check up. http://eq5unp.coding-pages.com
