@@ -14,11 +14,15 @@ class Controls {
   currY: number = 0;
   flag: boolean = false;
   saveImageUrlToStore: any;
+  state: any;
 
   constructor(props: any) {
     this.canvas = props.canvas;
     this.context = props.context;
     this.update(props);
+    this.state = {
+      canMoveEvent: false,
+    };
   }
 
   update = (props: any) => {
@@ -63,6 +67,7 @@ class Controls {
 
   handleMove = (e: any) => {
     if (this.flag) {
+      this.state.canMoveEvent = true;
       this.prevX = this.currX;
       this.prevY = this.currY;
       let x = 0;
@@ -76,24 +81,39 @@ class Controls {
       }
       this.currX = x - this.canvas.offsetLeft;
       this.currY = y - this.canvas.offsetTop;
-      if (this.modeType === MODE_TYPES.LINE) {
-        this.drawLine();
-      }
-      if (this.modeType === MODE_TYPES.ERASER) {
-        this.clearByModeType();
-      }
-
-      // if (this.modeType === MODE_TYPES.ROUND) {
-      //   this.drawRound();
-      // }
+      this.draw();
     }
   };
 
   handleUp = () => {
+    if (!this.state.canMoveEvent) {
+      this.prevX = this.currX;
+      this.prevY = this.currY;
+      this.draw();
+    } else {
+      this.state.canMoveEvent = false;
+    }
     if (this.flag) {
       this.saveImageUrlToStore(this.canvas.toDataURL());
     }
     this.flag = false;
+  };
+
+  draw = () => {
+    const { modeType } = this;
+    switch (modeType) {
+      case MODE_TYPES.LINE:
+        this.drawLine();
+        break;
+      case MODE_TYPES.ERASER:
+        this.clearByModeType();
+        break;
+      // case MODE_TYPES.ROUND:
+      //   this.drawRound();
+      //   break;
+      default:
+        break;
+    }
   };
 
   drawLine = () => {
