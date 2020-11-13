@@ -38,7 +38,6 @@ module.exports = {
     new StyleLintPlugin({
       configFile: path.resolve(__dirname, '../stylelint.config.js'),
       context: path.resolve(__dirname, '../src', ''),
-      failOnError: true,
       emitErrors: false,
       // quiet: false,
       // lintDirtyModulesOnly: true,
