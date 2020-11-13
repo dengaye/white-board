@@ -1,0 +1,50 @@
+.animated {
+  animation-duration: 0.3s;
+  animation-fill-mode: both;
+}
+
+@keyframes fadeIn {
+  0% {
+    opacity: 0;
+  }
+
+  100% {
+    opacity: 1;
+  }
+}
+
+.fadein {
+  animation-name: fadeIn;
+}
+
+@keyframes slideInDown {
+  from {
+    transform: translate3d(0, -100%, 0);
+    height: 0;
+  }
+
+  to {
+    transform: translate3d(0, 0, 0);
+    height: auto;
+  }
+}
+
+.slideindown {
+  animation-name: slideInDown;
+}
+
+@keyframes slideOutUp {
+  from {
+    transform: translate3d(0, 0, 0);
+    height: auto;
+  }
+
+  to {
+    height: 0;
+    transform: translate3d(0, -100%, 0);
+  }
+}
+
+.slideoutup {
+  animation-name: slideOutUp;
+}

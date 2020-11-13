@@ -153,9 +153,7 @@
     "space-in-parens": "error",
     "unicode-bom": ["error", "never"],
     "use-isnan": "error",
-    "rules": {
-      "prettier/prettier": "error"
-    }
+    "prettier/prettier": 2
   },
   "overrides": [
     {

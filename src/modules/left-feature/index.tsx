@@ -36,7 +36,7 @@ const LeftFeature = (props: ILeftFeature & IStore) => {
       if (!isEraser()) {
         props.setModeType(MODE_TYPES.ERASER);
       } else {
-        props.setModeType(MODE_TYPES.BRUSH);
+        props.setModeType(MODE_TYPES.LINE);
       }
     }
   };

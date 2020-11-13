@@ -11,7 +11,7 @@ module.exports = {
     publicPath: process.env.PUBLIC_PATH || '/',
   },
   mode: 'development',
-  devtool: 'inline-source-map',
+  devtool: 'cheap-module-source-map',
   // optimization: {
   //   splitChunks: {
   //     chunks: 'all',
@@ -39,8 +39,9 @@ module.exports = {
       configFile: path.resolve(__dirname, '../stylelint.config.js'),
       context: path.resolve(__dirname, '../src', ''),
       failOnError: true,
-      quiet: false,
-      lintDirtyModulesOnly: true,
+      emitErrors: false,
+      // quiet: false,
+      // lintDirtyModulesOnly: true,
     }),
     new MiniCssExtactPlugin({
       fileName: '[name].css',

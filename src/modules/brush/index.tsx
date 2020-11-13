@@ -14,7 +14,7 @@ interface IBrushProps {
 const Brush = (props: IBrushProps & IStore) => {
   const handleBrushClick = (color: string) => {
     props.setBrushColor(color);
-    props.setModeType(MODE_TYPES.BRUSH);
+    props.setModeType(MODE_TYPES.LINE);
   };
 
   const handleBrushSize = (size: number) => props.setLineWidth(size);
@@ -26,7 +26,7 @@ const Brush = (props: IBrushProps & IStore) => {
           <div
             key={index}
             className={
-              props.brushColor === item && props.modeType === MODE_TYPES.BRUSH ? style.active : ''
+              props.brushColor === item && props.modeType !== MODE_TYPES.ERASER ? style.active : ''
             }
             onClick={() => {
               handleBrushClick(item);

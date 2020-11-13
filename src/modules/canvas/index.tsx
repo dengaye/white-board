@@ -46,7 +46,6 @@ const CanvasContainer = (props: ICanvasProps & IStore) => {
   useEffect(() => {
     if (props.canvas && isMount) {
       NewControl.update(props);
-      NewControl.update(props);
     }
   }, [props.brushColor, props.lineWidth, props.modeType]);
 
