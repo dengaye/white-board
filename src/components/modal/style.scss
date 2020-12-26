@@ -1,0 +1,38 @@
+.modal-backdrop,
+.modal-container {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+}
+
+.modal-backdrop {
+  background: #000000;
+  opacity: 0.5;
+  z-index: 1040;
+}
+
+.modal-container {
+  z-index: 1050;
+  display: flex;
+  align-items: flex-end;
+}
+
+.modal-content {
+  position: relative;
+  padding: 30px;
+  border-radius: 2px;
+  background: #ffffff;
+  bottom: 0;
+  width: 100%;
+}
+
+.modal-close {
+  position: absolute;
+  right: 5px;
+  top: 5px;
+  width: 25px;
+  text-align: center;
+  line-height: 25px;
+}

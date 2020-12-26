@@ -14,7 +14,7 @@ module.exports = {
     'selector-pseudo-class-no-unknown': [
       true,
       {
-        ignorePseudoClasses: ['global', 'local'],
+        ignorePseudoClasses: ['global', 'local', 'host'],
       },
     ],
     indentation: 2,
@@ -40,5 +40,7 @@ module.exports = {
         ignoreProperties: ['/^\\$/', 'font-family'],
       },
     ],
+    "selector-type-no-unknown": null,
+    "selector-pseudo-element-no-unknown": null
   },
 };
