@@ -1,15 +1,16 @@
 import React, { useState } from 'react';
 import { IStore } from '@src/type';
 import { SHAPE_TYPE } from '@src/contants';
+import { setModeTypeByAction } from '@src/store/actions';
 
 import style from './style.module.scss';
 
 interface IRightFeature {
-  setModeType: any;
+  dispatch: any;
 }
 
 function RightFeature(props: IStore & IRightFeature) {
-  const { modeType } = props;
+  const { modeType, dispatch } = props;
   const [show, setShow] = useState(false);
 
   // const handleFold = () => {
@@ -17,7 +18,7 @@ function RightFeature(props: IStore & IRightFeature) {
   // };
 
   const handleShape = (type: string) => {
-    props.setModeType(type);
+    dispatch(setModeTypeByAction(type));
     setShow(false);
   };
 

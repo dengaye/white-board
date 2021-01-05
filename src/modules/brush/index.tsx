@@ -2,20 +2,23 @@ import React, { useState } from 'react';
 
 import { BRUSH_COLORS, BRUSH_SIZES, MODE_TYPES } from '@src/contants';
 import { IStore } from '@src/type';
+import {
+  setBrushColorByAction,
+  setLineWidthByAction,
+  setModeTypeByAction,
+} from '@src/store/actions';
 
 import Modal from '@component/modal';
 import { COLORS } from './constant';
 import style from './style.module.scss';
 
 interface IBrushProps {
-  setBrushColor: any;
-  setModeType: any;
-  setLineWidth: any;
   brushColor: string;
+  dispatch: any;
 }
 
 const Brush = (props: IBrushProps & IStore) => {
-  const { brushColor } = props;
+  const { brushColor, dispatch } = props;
   const [showModal, setShowModal] = useState(false);
   const [selectColor, setSelectColor] = useState('');
   const handleBrushClick = (color: string, flag: boolean) => {
@@ -23,15 +26,15 @@ const Brush = (props: IBrushProps & IStore) => {
       setShowModal(true);
     } else {
       setShowModal(false);
-      props.setBrushColor(color);
-      props.setModeType(MODE_TYPES.LINE);
+      dispatch(setBrushColorByAction(color));
+      dispatch(setModeTypeByAction(MODE_TYPES.LINE));
     }
   };
 
-  const handleBrushSize = (size: number) => props.setLineWidth(size);
+  const handleBrushSize = (size: number) => dispatch(setLineWidthByAction(size));
 
   const handleSelectColor = (item: string) => {
-    props.setBrushColor(item);
+    dispatch(setBrushColorByAction(item));
     setSelectColor(item);
     setShowModal(false);
   };
@@ -75,22 +78,20 @@ const Brush = (props: IBrushProps & IStore) => {
           ))}
         </div>
       </div>
-      {showModal && (
-        <Modal visible={showModal} onCancel={() => setShowModal(false)}>
-          <div className={style.selectColorContainer}>
-            <div className={style.selectColorContent}>
-              {COLORS.map((item: string) => (
-                <div
-                  key={item}
-                  className={`${style.selectColorItem} ${selectColor === item ? style.active : ''}`}
-                  style={{ backgroundColor: item }}
-                  onClick={() => handleSelectColor(item)}
-                ></div>
-              ))}
-            </div>
+      <Modal visible={showModal} onCancel={() => setShowModal(false)}>
+        <div className={style.selectColorContainer}>
+          <div className={style.selectColorContent}>
+            {COLORS.map((item: string) => (
+              <div
+                key={item}
+                className={`${style.selectColorItem} ${selectColor === item ? style.active : ''}`}
+                style={{ backgroundColor: item }}
+                onClick={() => handleSelectColor(item)}
+              ></div>
+            ))}
           </div>
-        </Modal>
-      )}
+        </div>
+      </Modal>
     </>
   );
 };

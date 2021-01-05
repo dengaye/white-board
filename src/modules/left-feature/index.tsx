@@ -7,24 +7,34 @@ import { IStore } from '@src/type';
 import ArrowLeftSvg from '@image/arrow-left.svg';
 import ArrowRightSvg from '@image/arrow-right.svg';
 import SaveImage from '@component/save-image/index';
+import {
+  setModeTypeByAction,
+  setCanvasHistoryByAction,
+  setCanvasHistoryOfReconveryByAction,
+} from '@src/store/actions';
 
 import style from './style.module.scss';
 
 interface ILeftFeature {
-  setModeType: any;
-  setCanvasHistory: any;
-  setCanvasHistoryOfReconvery: any;
+  dispatch: any;
 }
 
 const LeftFeature = (props: ILeftFeature & IStore) => {
-  const { canvasHistory, modeType, canvas, canvasContext, canvasHistoryOfReconvery } = props;
+  const {
+    canvasHistory,
+    modeType,
+    canvas,
+    canvasContext,
+    canvasHistoryOfReconvery,
+    dispatch,
+  } = props;
 
   const handleClear = () => {
     if (canvas) {
       const w = canvas.width;
       const h = canvas.height;
-      props.setCanvasHistory([...canvasHistory, canvas.toDataURL()]);
-      props.setCanvasHistoryOfReconvery([...canvasHistoryOfReconvery, '']);
+      dispatch(setCanvasHistoryByAction([...canvasHistory, canvas.toDataURL()]));
+      dispatch(setCanvasHistoryOfReconveryByAction([...canvasHistoryOfReconvery, '']));
       canvasContext.clearRect(0, 0, w, h);
     }
   };
@@ -34,9 +44,9 @@ const LeftFeature = (props: ILeftFeature & IStore) => {
   const handleEraser = () => {
     if (canvas) {
       if (!isEraser()) {
-        props.setModeType(MODE_TYPES.ERASER);
+        dispatch(setModeTypeByAction(MODE_TYPES.ERASER));
       } else {
-        props.setModeType(MODE_TYPES.LINE);
+        dispatch(setModeTypeByAction(MODE_TYPES.LINE));
       }
     }
   };
@@ -56,9 +66,9 @@ const LeftFeature = (props: ILeftFeature & IStore) => {
       const pop = newDataUrl.pop();
       const uri = newDataUrl[newDataUrl.length - 1];
       reDraw(uri);
-      props.setCanvasHistory(newDataUrl);
+      dispatch(setCanvasHistoryByAction(newDataUrl));
       if (canvasHistoryOfReconvery[canvasHistoryOfReconvery.length - 1] !== '') {
-        props.setCanvasHistoryOfReconvery([...canvasHistoryOfReconvery, pop]);
+        dispatch(setCanvasHistoryOfReconveryByAction([...canvasHistoryOfReconvery, pop]));
       }
     }
   };
@@ -69,8 +79,8 @@ const LeftFeature = (props: ILeftFeature & IStore) => {
       const uri = newDataUrl[newDataUrl.length - 1];
       const pop = newDataUrl.pop();
       reDraw(uri);
-      props.setCanvasHistoryOfReconvery(newDataUrl);
-      props.setCanvasHistory([...canvasHistory, pop]);
+      dispatch(setCanvasHistoryOfReconveryByAction(newDataUrl));
+      dispatch(setCanvasHistoryByAction([...canvasHistory, pop]));
     }
   };
 

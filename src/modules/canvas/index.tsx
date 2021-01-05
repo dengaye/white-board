@@ -2,17 +2,20 @@ import React, { useEffect, useState } from 'react';
 
 import Controls from '@util/controls';
 import { IStore } from '@src/type';
+import {
+  setCanvasByAction,
+  setCanvasContextByAction,
+  setCanvasHistoryByAction,
+} from '@src/store/actions';
 
 const NewControl = new Controls({});
 
 interface ICanvasProps {
-  setCanvasContext: any;
-  setCanvas: any;
-  setCanvasHistory: any;
+  dispatch: any;
 }
 
 const CanvasContainer = (props: ICanvasProps & IStore) => {
-  const { canvas, canvasContext, canvasHistory } = props;
+  const { canvas, canvasContext, canvasHistory, dispatch } = props;
   const [isMount, setMount] = useState(false);
 
   useEffect(() => {
@@ -22,14 +25,14 @@ const CanvasContainer = (props: ICanvasProps & IStore) => {
     if (canvasDOM) {
       canvasDOM.width = window.innerWidth;
       canvasDOM.height = window.innerHeight;
-      props.setCanvas(canvasDOM);
-      props.setCanvasContext(context);
+      dispatch(setCanvasByAction(canvasDOM));
+      dispatch(setCanvasContextByAction(context));
     }
   }, []);
 
   const saveImageUrlToStore = (dataUrl: string) => {
     canvasHistory.push(dataUrl);
-    props.setCanvasHistory(canvasHistory);
+    dispatch(setCanvasHistoryByAction(canvasHistory));
   };
 
   useEffect(() => {
