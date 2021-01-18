@@ -1,21 +1,19 @@
-import React, { useEffect, useState } from 'react';
+import React, { useEffect, useState, useContext } from 'react';
 
 import Controls from '@util/controls';
-import { IStore } from '@src/type';
+
 import {
+  WhiteBoadeContext,
   setCanvasByAction,
   setCanvasContextByAction,
   setCanvasHistoryByAction,
-} from '@src/store/actions';
+} from '@src/store';
 
 const NewControl = new Controls({});
 
-interface ICanvasProps {
-  dispatch: any;
-}
-
-const CanvasContainer = (props: ICanvasProps & IStore) => {
-  const { canvas, canvasContext, canvasHistory, dispatch } = props;
+const CanvasContainer = () => {
+  const { dispatch, state } = useContext(WhiteBoadeContext);
+  const { canvas, canvasContext, canvasHistory } = state;
   const [isMount, setMount] = useState(false);
 
   useEffect(() => {
@@ -39,7 +37,7 @@ const CanvasContainer = (props: ICanvasProps & IStore) => {
     if (canvas && !isMount) {
       setMount(true);
       NewControl.init({
-        ...props,
+        ...state,
         context: canvasContext,
         saveImageUrlToStore,
       });
@@ -47,10 +45,10 @@ const CanvasContainer = (props: ICanvasProps & IStore) => {
   }, [canvas]);
 
   useEffect(() => {
-    if (props.canvas && isMount) {
-      NewControl.update(props);
+    if (state.canvas && isMount) {
+      NewControl.update(state);
     }
-  }, [props.brushColor, props.lineWidth, props.modeType]);
+  }, [state.brushColor, state.lineWidth, state.modeType]);
 
   return <canvas id='canvas'></canvas>;
 };

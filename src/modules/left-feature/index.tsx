@@ -1,9 +1,8 @@
-import React from 'react';
+import React, { useContext } from 'react';
 
 import { MODE_TYPES } from '@src/contants';
 import DeleteSvg from '@image/delete.svg';
 import EraserSvg from '@image/eraser.svg';
-import { IStore } from '@src/type';
 import ArrowLeftSvg from '@image/arrow-left.svg';
 import ArrowRightSvg from '@image/arrow-right.svg';
 import SaveImage from '@component/save-image/index';
@@ -11,23 +10,14 @@ import {
   setModeTypeByAction,
   setCanvasHistoryByAction,
   setCanvasHistoryOfReconveryByAction,
-} from '@src/store/actions';
+  WhiteBoadeContext,
+} from '@src/store';
 
 import style from './style.module.scss';
 
-interface ILeftFeature {
-  dispatch: any;
-}
-
-const LeftFeature = (props: ILeftFeature & IStore) => {
-  const {
-    canvasHistory,
-    modeType,
-    canvas,
-    canvasContext,
-    canvasHistoryOfReconvery,
-    dispatch,
-  } = props;
+const LeftFeature = () => {
+  const { dispatch, state } = useContext(WhiteBoadeContext);
+  const { canvasHistory, modeType, canvas, canvasContext, canvasHistoryOfReconvery } = state;
 
   const handleClear = () => {
     if (canvas) {

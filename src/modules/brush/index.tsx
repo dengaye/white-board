@@ -1,26 +1,24 @@
-import React, { useState } from 'react';
+import React, { useState, useContext } from 'react';
 
 import { BRUSH_COLORS, BRUSH_SIZES, MODE_TYPES } from '@src/contants';
-import { IStore } from '@src/type';
+
 import {
   setBrushColorByAction,
   setLineWidthByAction,
   setModeTypeByAction,
-} from '@src/store/actions';
+  WhiteBoadeContext,
+} from '@src/store';
 
 import Modal from '@component/modal';
 import { COLORS } from './constant';
 import style from './style.module.scss';
 
-interface IBrushProps {
-  brushColor: string;
-  dispatch: any;
-}
-
-const Brush = (props: IBrushProps & IStore) => {
-  const { brushColor, dispatch } = props;
+const Brush = () => {
+  const { dispatch, state } = useContext(WhiteBoadeContext);
+  const { brushColor } = state;
   const [showModal, setShowModal] = useState(false);
   const [selectColor, setSelectColor] = useState('');
+
   const handleBrushClick = (color: string, flag: boolean) => {
     if (flag) {
       setShowModal(true);
@@ -47,7 +45,7 @@ const Brush = (props: IBrushProps & IStore) => {
             <div
               key={index}
               className={
-                brushColor === item && props.modeType !== MODE_TYPES.ERASER ? style.active : ''
+                brushColor === item && state.modeType !== MODE_TYPES.ERASER ? style.active : ''
               }
               onClick={() => {
                 handleBrushClick(item, brushColor === item);
@@ -56,11 +54,11 @@ const Brush = (props: IBrushProps & IStore) => {
           ))}
           <div
             className={
-              brushColor === selectColor && props.modeType !== MODE_TYPES.ERASER ? style.active : ''
+              brushColor === selectColor && state.modeType !== MODE_TYPES.ERASER ? style.active : ''
             }
             style={{ backgroundColor: selectColor }}
             onClick={() => {
-              handleBrushClick(selectColor, props.brushColor === selectColor);
+              handleBrushClick(selectColor, brushColor === selectColor);
             }}
           ></div>
         </div>
@@ -68,7 +66,7 @@ const Brush = (props: IBrushProps & IStore) => {
           {BRUSH_SIZES.map((value: number, index: number) => (
             <div
               key={index + value}
-              className={value === props.lineWidth ? style.active : ''}
+              className={value === state.lineWidth ? style.active : ''}
               onClick={() => {
                 handleBrushSize(value);
               }}

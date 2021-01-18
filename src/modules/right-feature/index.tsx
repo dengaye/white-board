@@ -1,16 +1,12 @@
-import React, { useState } from 'react';
-import { IStore } from '@src/type';
+import React, { useState, useContext } from 'react';
 import { SHAPE_TYPE } from '@src/contants';
-import { setModeTypeByAction } from '@src/store/actions';
+import { setModeTypeByAction, WhiteBoadeContext } from '@src/store';
 
 import style from './style.module.scss';
 
-interface IRightFeature {
-  dispatch: any;
-}
-
-function RightFeature(props: IStore & IRightFeature) {
-  const { modeType, dispatch } = props;
+function RightFeature() {
+  const { dispatch, state } = useContext(WhiteBoadeContext);
+  const { modeType } = state;
   const [show, setShow] = useState(false);
 
   const handleFold = () => {

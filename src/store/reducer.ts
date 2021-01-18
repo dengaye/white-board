@@ -1,5 +1,15 @@
 import { ACTIONS, BRUSH_COLORS, BRUSH_SIZES, MODE_TYPES } from '@src/contants';
 
+export interface IState {
+  canvas: any;
+  canvasContext: any;
+  brushColor: string;
+  lineWidth: number;
+  modeType: string;
+  canvasHistory: any;
+  canvasHistoryOfReconvery: any;
+}
+
 export const initialState = {
   canvas: null,
   canvasContext: null,
@@ -11,7 +21,7 @@ export const initialState = {
 };
 
 export interface IAction {
-  payload: any;
+  payload?: any;
   type: string;
 }
 
