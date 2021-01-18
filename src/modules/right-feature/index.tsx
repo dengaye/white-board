@@ -13,9 +13,9 @@ function RightFeature(props: IStore & IRightFeature) {
   const { modeType, dispatch } = props;
   const [show, setShow] = useState(false);
 
-  // const handleFold = () => {
-  //   setShow(!show);
-  // };
+  const handleFold = () => {
+    setShow((state) => !state);
+  };
 
   const handleShape = (type: string) => {
     dispatch(setModeTypeByAction(type));
@@ -34,7 +34,7 @@ function RightFeature(props: IStore & IRightFeature) {
           </div>
         ))}
       </div>
-      {/* <div className={`${style.fold} ${show && style.active}`} onClick={handleFold}></div> */}
+      <div className={`${style.fold} ${show && style.active}`} onClick={handleFold}></div>
     </div>
   );
 }

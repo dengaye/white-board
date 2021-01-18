@@ -17,6 +17,19 @@ export const drawLine = (
   ctx.closePath();
 };
 
-export const drawRound = (ctx: any) => {
+export const drawRound = (
+  ctx: any,
+  x: number,
+  y: number,
+  r: number,
+  color: string,
+  lineWidth: number
+) => {
   ctx.beginPath();
+  ctx.arc(x, y, r, 0, 2 * Math.PI);
+  ctx.lineWidth = lineWidth;
+  ctx.strokeStyle = color;
+  ctx.lineCap = 'round';
+  ctx.closePath();
+  ctx.stroke();
 };

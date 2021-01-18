@@ -1,6 +1,6 @@
 import { MODE_TYPES } from '@src/contants';
 import { touchable } from '@util/util';
-import { drawLine } from '@util/draw';
+import { drawLine, drawRound } from '@util/draw';
 
 class Controls {
   canvas: any;
@@ -108,9 +108,9 @@ class Controls {
       case MODE_TYPES.ERASER:
         this.clearByModeType();
         break;
-      // case MODE_TYPES.ROUND:
-      //   this.drawRound();
-      //   break;
+      case MODE_TYPES.ROUND:
+        this.drawRound();
+        break;
       default:
         break;
     }
@@ -121,7 +121,12 @@ class Controls {
     drawLine(context, prevX, prevY, currX, currY, brushColor, lineWidth);
   };
 
-  // drawRound = () => {};
+  drawRound = () => {
+    const { prevX, prevY, currX, context, brushColor, lineWidth } = this;
+    context.save();
+    drawRound(context, prevX, prevY, Math.abs(currX - prevX + lineWidth), brushColor, lineWidth);
+    context.restore();
+  };
 
   clearByModeType() {
     const { context, lineWidth } = this;
