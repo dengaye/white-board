@@ -1,0 +1,26 @@
+.select-color {
+  &-content {
+    display: flex;
+    flex-wrap: wrap;
+  }
+
+  &-item {
+    width: 40px;
+    height: 30px;
+    border-radius: 5px;
+    margin-right: 10px;
+    margin-bottom: 10px;
+
+    &:nth-of-type(6) {
+      margin-right: 0;
+    }
+
+    &:nth-last-of-type(-n + 6) {
+      margin-bottom: 0;
+    }
+
+    &.active {
+      box-shadow: 1px 2px 5px rgba(0, 0, 0, 0.3);
+    }
+  }
+}

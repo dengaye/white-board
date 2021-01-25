@@ -1,0 +1,14 @@
+.size-content {
+  margin-top: 20px;
+  display: flex;
+  align-items: center;
+  transition: all, 0.3s;
+
+  span {
+    display: flex;
+    border-radius: 50%;
+    background: #202d40;
+    pointer-events: none;
+    box-sizing: border-box;
+  }
+}

@@ -1,11 +1,11 @@
-import React, { useState, useContext } from 'react';
+import React, { useState } from 'react';
 import { SHAPE_TYPE } from '@src/contants';
-import { setModeTypeByAction, WhiteBoadeContext } from '@src/store';
+import { setModeTypeByAction, UseWhiteBoardContext } from '@src/store';
 
 import style from './style.module.scss';
 
 function RightFeature() {
-  const { dispatch, state } = useContext(WhiteBoadeContext);
+  const { dispatch, state } = UseWhiteBoardContext();
   const { modeType } = state;
   const [show, setShow] = useState(false);
 

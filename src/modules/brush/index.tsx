@@ -1,4 +1,4 @@
-import React, { useState, useContext } from 'react';
+import React, { useState, useCallback } from 'react';
 
 import { BRUSH_COLORS, BRUSH_SIZES, MODE_TYPES } from '@src/contants';
 
@@ -6,18 +6,20 @@ import {
   setBrushColorByAction,
   setLineWidthByAction,
   setModeTypeByAction,
-  WhiteBoadeContext,
+  UseWhiteBoardContext,
 } from '@src/store';
+import { getWidthOrHeightOfSize } from '@util/util';
 
-import Modal from '@component/modal';
-import { COLORS } from './constant';
+import SizeModal from '@component/size-modal';
+import ColorModal from '@component/color-modal';
 import style from './style.module.scss';
 
 const Brush = () => {
-  const { dispatch, state } = useContext(WhiteBoadeContext);
+  const { dispatch, state } = UseWhiteBoardContext();
   const { brushColor } = state;
   const [showModal, setShowModal] = useState(false);
   const [selectColor, setSelectColor] = useState('');
+  const [showSizeModal, setShowSizeModal] = useState(false);
 
   const handleBrushClick = (color: string, flag: boolean) => {
     if (flag) {
@@ -31,36 +33,28 @@ const Brush = () => {
 
   const handleBrushSize = (size: number) => dispatch(setLineWidthByAction(size));
 
-  const handleSelectColor = (item: string) => {
+  const handleSelectColor = useCallback((item: string) => {
     dispatch(setBrushColorByAction(item));
     setSelectColor(item);
     setShowModal(false);
-  };
+  }, []);
 
   return (
     <>
       <div className={style.brushContainer}>
         <div className={style.brushContent}>
-          {BRUSH_COLORS.map((item: string, index: number) => (
+          {[...BRUSH_COLORS, selectColor].map((item: string, index: number) => (
             <div
               key={index}
               className={
                 brushColor === item && state.modeType !== MODE_TYPES.ERASER ? style.active : ''
               }
+              style={{ backgroundColor: item }}
               onClick={() => {
                 handleBrushClick(item, brushColor === item);
               }}
             ></div>
           ))}
-          <div
-            className={
-              brushColor === selectColor && state.modeType !== MODE_TYPES.ERASER ? style.active : ''
-            }
-            style={{ backgroundColor: selectColor }}
-            onClick={() => {
-              handleBrushClick(selectColor, brushColor === selectColor);
-            }}
-          ></div>
         </div>
         <div className={style.brushSize}>
           {BRUSH_SIZES.map((value: number, index: number) => (
@@ -71,27 +65,24 @@ const Brush = () => {
                 handleBrushSize(value);
               }}
             >
-              <span></span>
+              <span
+                style={{
+                  width: getWidthOrHeightOfSize(value),
+                  height: getWidthOrHeightOfSize(value),
+                }}
+              ></span>
             </div>
           ))}
         </div>
       </div>
-      <Modal visible={showModal} onCancel={() => setShowModal(false)}>
-        <div className={style.selectColorContainer}>
-          <div className={style.selectColorContent}>
-            {COLORS.map((item: string) => (
-              <div
-                key={item}
-                className={`${style.selectColorItem} ${selectColor === item ? style.active : ''}`}
-                style={{ backgroundColor: item }}
-                onClick={() => handleSelectColor(item)}
-              ></div>
-            ))}
-          </div>
-        </div>
-      </Modal>
+      <ColorModal
+        visible={showModal}
+        onCancel={() => setShowModal(false)}
+        updateColor={handleSelectColor}
+      />
+      <SizeModal visible={showSizeModal} onCancel={() => setShowSizeModal(false)} />
     </>
   );
 };
 
-export default Brush;
+export default React.memo(Brush);

@@ -1,0 +1,32 @@
+.progress-container {
+  width: 100%;
+  position: relative;
+}
+
+.progress {
+  width: 100%;
+  height: 20px;
+}
+
+.drag-block {
+  position: absolute;
+  height: 35px;
+  width: 35px;
+  // background-color: #ffffff;
+  // border: 1px solid #dadfe6;
+  top: 50%;
+  transform: translate(0, -50%);
+  border-radius: 4px;
+  display: flex;
+  align-items: center;
+  left: -17.5px;
+  justify-content: center;
+
+  .drag-block-content {
+    height: 20px;
+    width: 10px;
+    background-color: #ffffff;
+    border: 1px solid #dadfe6;
+    pointer-events: none;
+  }
+}

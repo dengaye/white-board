@@ -27,4 +27,4 @@ const saveImage = (props: ISaveImage) => {
   );
 };
 
-export default saveImage;
+export default React.memo(saveImage);

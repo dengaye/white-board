@@ -1,18 +1,18 @@
-import React, { useEffect, useState, useContext } from 'react';
+import React, { useEffect, useState } from 'react';
 
 import Controls from '@util/controls';
 
 import {
-  WhiteBoadeContext,
   setCanvasByAction,
   setCanvasContextByAction,
   setCanvasHistoryByAction,
+  UseWhiteBoardContext,
 } from '@src/store';
 
 const NewControl = new Controls({});
 
 const CanvasContainer = () => {
-  const { dispatch, state } = useContext(WhiteBoadeContext);
+  const { dispatch, state } = UseWhiteBoardContext();
   const { canvas, canvasContext, canvasHistory } = state;
   const [isMount, setMount] = useState(false);
 
@@ -53,4 +53,4 @@ const CanvasContainer = () => {
   return <canvas id='canvas'></canvas>;
 };
 
-export default CanvasContainer;
+export default React.memo(CanvasContainer);

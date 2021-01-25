@@ -1,4 +1,4 @@
-import React, { useContext } from 'react';
+import React from 'react';
 
 import { MODE_TYPES } from '@src/contants';
 import DeleteSvg from '@image/delete.svg';
@@ -10,13 +10,13 @@ import {
   setModeTypeByAction,
   setCanvasHistoryByAction,
   setCanvasHistoryOfReconveryByAction,
-  WhiteBoadeContext,
+  UseWhiteBoardContext,
 } from '@src/store';
 
 import style from './style.module.scss';
 
 const LeftFeature = () => {
-  const { dispatch, state } = useContext(WhiteBoadeContext);
+  const { dispatch, state } = UseWhiteBoardContext();
   const { canvasHistory, modeType, canvas, canvasContext, canvasHistoryOfReconvery } = state;
 
   const handleClear = () => {
@@ -102,4 +102,4 @@ const LeftFeature = () => {
   );
 };
 
-export default LeftFeature;
+export default React.memo(LeftFeature);

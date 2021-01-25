@@ -5,26 +5,31 @@ export interface IModalProps {
   onOk?: () => void;
   onCancel?: () => void;
   children?: any;
+  showCloseIcon?: boolean;
 }
 
 import s from './style.scss';
 
-export default function Modal(props: IModalProps) {
-  const { visible, children } = props;
+function Modal(props: IModalProps) {
+  const { visible, children, showCloseIcon } = props;
   if (!visible) {
     return null;
   }
   return (
     <>
-      <div className={s.modalBackdrop}></div>
+      <div className={s.modalBackdrop} onClick={props.onCancel}></div>
       <div className={s.modalContainer}>
         <div className={s.modalContent}>
-          <div className={s.modalClose} onClick={props.onCancel}>
-            x
-          </div>
+          {showCloseIcon && (
+            <div className={s.modalClose} onClick={props.onCancel}>
+              x
+            </div>
+          )}
           {children}
         </div>
       </div>
     </>
   );
 }
+
+export default React.memo(Modal);

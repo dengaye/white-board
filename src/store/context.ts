@@ -1,7 +1,7 @@
-import React from 'react';
+import React, { useContext } from 'react';
 import { IState, initialState, IAction } from './reducer';
 
-const WhiteBoadeContext = React.createContext<{
+export const WhiteBoardContext = React.createContext<{
   state: IState;
   dispatch: React.Dispatch<IAction>;
 }>({
@@ -10,4 +10,9 @@ const WhiteBoadeContext = React.createContext<{
   dispatch: () => {},
 });
 
-export default WhiteBoadeContext;
+export const WhiteBoardContextProvider = WhiteBoardContext.Provider;
+
+export const UseWhiteBoardContext = () => {
+  const context = useContext(WhiteBoardContext);
+  return context;
+};
