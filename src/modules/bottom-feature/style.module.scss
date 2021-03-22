@@ -1,0 +1,10 @@
+.brush-container {
+  display: flex;
+  position: fixed;
+  bottom: 0;
+  width: calc(100% - 20px);
+  padding-left: 10px;
+  padding-right: 10px;
+  justify-content: space-between;
+  height: 45px;
+}

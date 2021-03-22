@@ -1,17 +1,19 @@
 import React from 'react';
 
+import { UseWhiteBoardContext } from '@src/store';
 import { downloadFile } from '@util/util';
 import DownloadSvg from '@image/download.svg';
 
 import style from './style.module.scss';
 
 interface ISaveImage {
-  canvas: any;
   className?: string;
 }
 
 const saveImage = (props: ISaveImage) => {
-  const { canvas } = props;
+  const {
+    state: { canvas },
+  } = UseWhiteBoardContext();
 
   const handleDownload = () => {
     if (canvas) {

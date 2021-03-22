@@ -1,6 +1,6 @@
 import React from 'react';
 import Modal from '@component/modal';
-import { COLORS } from '@module/brush/constant';
+import { COLORS_MODAL } from '@src/contants';
 import { UseWhiteBoardContext } from '@src/store';
 
 import style from './style.scss';
@@ -19,7 +19,7 @@ function ColorModal(props: IColorModalProps) {
     <Modal visible={visible} onCancel={props.onCancel}>
       <div className={style.selectColorContainer}>
         <div className={style.selectColorContent}>
-          {COLORS.map((item: string) => (
+          {COLORS_MODAL.map((item: string) => (
             <div
               key={item}
               className={`${style.selectColorItem} ${

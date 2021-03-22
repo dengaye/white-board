@@ -1,5 +1,7 @@
 export const BRUSH_COLORS = ['black', 'red', 'blue'];
 
+export const COLORS_MODAL = ['#a3ddcb', '#e8e9a1', '#e6b566', '#e56f7e'];
+
 export const BRUSH_SIZES = [2, 5, 10];
 
 export const MODE_TYPES = {

@@ -1,7 +1,7 @@
 import React, { useMemo, useReducer } from 'react';
 
 import CanvasContainer from './modules/canvas';
-import Brush from './modules/brush';
+import BottomFeature from './modules/bottom-feature';
 import LeftFeature from './modules/left-feature/index';
 import RightFeature from './modules/right-feature';
 import { WhiteBoardContextProvider, reducer, initialState } from '@src/store';
@@ -13,7 +13,7 @@ export default function Container() {
   return (
     <WhiteBoardContextProvider value={contextValue}>
       <CanvasContainer />
-      <Brush />
+      <BottomFeature />
       <LeftFeature />
       <RightFeature />
     </WhiteBoardContextProvider>
