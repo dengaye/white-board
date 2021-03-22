@@ -22,7 +22,6 @@ function RightFeature() {
     <div className={style.rightFeature}>
       <div className={style.shapeType}>
         <div className={style[modeType]}></div>
-        <div className={style[modeType]}></div>
       </div>
       <div className={`${style.shapeContent} ${show && style.active}`}>
         {Object.values(SHAPE_TYPE).map((i: string) => (

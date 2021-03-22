@@ -16,7 +16,7 @@ import style from './style.module.scss';
 
 const Brush = () => {
   const { dispatch, state } = UseWhiteBoardContext();
-  const { brushColor, lineWidth } = state;
+  const { brushColor, lineWidth, modeType } = state;
   const [showModal, setShowModal] = useState(false);
   const [selectColor, setSelectColor] = useState('');
   const [showSizeModal, setShowSizeModal] = useState(false);
@@ -27,7 +27,9 @@ const Brush = () => {
     } else {
       setShowModal(false);
       dispatch(setBrushColorByAction(color));
-      dispatch(setModeTypeByAction(MODE_TYPES.LINE));
+      if (modeType === MODE_TYPES.ERASER) {
+        dispatch(setModeTypeByAction(MODE_TYPES.LINE));
+      }
     }
   };
 
