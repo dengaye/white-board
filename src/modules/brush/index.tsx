@@ -16,7 +16,7 @@ import style from './style.module.scss';
 
 const Brush = () => {
   const { dispatch, state } = UseWhiteBoardContext();
-  const { brushColor } = state;
+  const { brushColor, lineWidth } = state;
   const [showModal, setShowModal] = useState(false);
   const [selectColor, setSelectColor] = useState('');
   const [showSizeModal, setShowSizeModal] = useState(false);
@@ -31,7 +31,14 @@ const Brush = () => {
     }
   };
 
-  const handleBrushSize = (size: number) => dispatch(setLineWidthByAction(size));
+  const handleBrushSize = (size: number, flag: boolean) => {
+    if (flag) {
+      setShowSizeModal(true);
+    } else {
+      dispatch(setLineWidthByAction(size));
+      setShowSizeModal(false);
+    }
+  };
 
   const handleSelectColor = useCallback((item: string) => {
     dispatch(setBrushColorByAction(item));
@@ -60,9 +67,9 @@ const Brush = () => {
           {BRUSH_SIZES.map((value: number, index: number) => (
             <div
               key={index + value}
-              className={value === state.lineWidth ? style.active : ''}
+              className={value === lineWidth ? style.active : ''}
               onClick={() => {
-                handleBrushSize(value);
+                handleBrushSize(value, lineWidth === value);
               }}
             >
               <span

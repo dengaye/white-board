@@ -1,8 +1,9 @@
-import React, { useState } from 'react';
+import React, { useCallback } from 'react';
 import Modal from '@component/modal';
 import Slider from '@component/slider';
-import { getWidthOrHeightOfSize } from '@util/util';
 import style from './style.scss';
+
+import { setLineWidthByAction, UseWhiteBoardContext } from '@src/store';
 
 interface ISizeModalProps {
   visible: boolean;
@@ -10,21 +11,21 @@ interface ISizeModalProps {
 }
 
 const SizeModal = (props: ISizeModalProps) => {
+  const { dispatch, state } = UseWhiteBoardContext();
   const { visible } = props;
-  const [size, setSize] = useState(0);
 
-  const updateValue = (value: number) => {
-    setSize(value);
-  };
+  const updateValue = useCallback((value: number) => {
+    dispatch(setLineWidthByAction(value));
+  }, []);
 
   return (
     <Modal visible={visible} onCancel={props.onCancel}>
-      <Slider value={size} updateValue={updateValue} />
+      <Slider value={state.lineWidth} updateValue={updateValue} />
       <section className={style.sizeContent}>
         <span
           style={{
-            width: getWidthOrHeightOfSize(size),
-            height: getWidthOrHeightOfSize(size),
+            width: `${state.lineWidth}px`,
+            height: `${state.lineWidth}px`,
           }}
         ></span>
       </section>
