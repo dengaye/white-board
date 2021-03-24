@@ -1,4 +1,4 @@
-import React, { useMemo, useReducer } from 'react';
+import React, { useReducer } from 'react';
 
 import CanvasContainer from './modules/canvas';
 import BottomFeature from './modules/bottom-feature';
@@ -8,7 +8,7 @@ import { WhiteBoardContextProvider, reducer, initialState } from '@src/store';
 
 export default function Container() {
   const [state, dispatch] = useReducer(reducer, initialState);
-  const contextValue = useMemo(() => ({ state, dispatch }), [state, dispatch]);
+  const contextValue = { state, dispatch };
 
   return (
     <WhiteBoardContextProvider value={contextValue}>

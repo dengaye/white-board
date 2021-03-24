@@ -12,4 +12,4 @@ const BottomFeature = () => (
   </div>
 );
 
-export default React.memo(BottomFeature);
+export default BottomFeature;

@@ -1,56 +1,48 @@
-import React, { useEffect, useState } from 'react';
+import React, { useEffect } from 'react';
 
-import Controls from '@util/controls';
+import useControl from '@src/hooks/use-controls';
 
 import {
   setCanvasByAction,
   setCanvasContextByAction,
-  setCanvasHistoryByAction,
   UseWhiteBoardContext,
+  setTemplateCanvasByAction,
+  setTemplateContextByAction,
 } from '@src/store';
 
-const NewControl = new Controls({});
-
 const CanvasContainer = () => {
-  const { dispatch, state } = UseWhiteBoardContext();
-  const { canvas, canvasContext, canvasHistory } = state;
-  const [isMount, setMount] = useState(false);
+  const { dispatch } = UseWhiteBoardContext();
 
   useEffect(() => {
     const canvasDOM = window.document.getElementById('canvas') as any;
     const context = canvasDOM.getContext('2d');
+    const container = canvasDOM.parentNode;
+    const width = window.innerWidth;
+    const height = window.innerHeight;
 
-    if (canvasDOM) {
-      canvasDOM.width = window.innerWidth;
-      canvasDOM.height = window.innerHeight;
-      dispatch(setCanvasByAction(canvasDOM));
-      dispatch(setCanvasContextByAction(context));
+    canvasDOM.width = width;
+    canvasDOM.height = height;
+
+    function createTemplateCanvas() {
+      const templateCanvasDOM = window.document.createElement('canvas');
+      const templateContext = templateCanvasDOM.getContext('2d');
+
+      templateCanvasDOM.id = 'template-canvas';
+      templateCanvasDOM.width = width;
+      templateCanvasDOM.height = height;
+      container.appendChild(templateCanvasDOM);
+      dispatch(setTemplateCanvasByAction(templateCanvasDOM));
+      dispatch(setTemplateContextByAction(templateContext));
     }
+
+    createTemplateCanvas();
+    dispatch(setCanvasByAction(canvasDOM));
+    dispatch(setCanvasContextByAction(context));
   }, []);
 
-  const saveImageUrlToStore = (dataUrl: string) => {
-    canvasHistory.push(dataUrl);
-    dispatch(setCanvasHistoryByAction(canvasHistory));
-  };
-
-  useEffect(() => {
-    if (canvas && !isMount) {
-      setMount(true);
-      NewControl.init({
-        ...state,
-        context: canvasContext,
-        saveImageUrlToStore,
-      });
-    }
-  }, [canvas]);
-
-  useEffect(() => {
-    if (state.canvas && isMount) {
-      NewControl.update(state);
-    }
-  }, [state.brushColor, state.lineWidth, state.modeType]);
+  useControl();
 
   return <canvas id='canvas'></canvas>;
 };
 
-export default React.memo(CanvasContainer);
+export default CanvasContainer;

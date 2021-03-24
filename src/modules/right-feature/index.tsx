@@ -9,4 +9,4 @@ const RightFeature = () => (
   </div>
 );
 
-export default React.memo(RightFeature);
+export default RightFeature;

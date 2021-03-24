@@ -8,6 +8,8 @@ export interface IState {
   modeType: string;
   canvasHistory: any;
   canvasHistoryOfReconvery: any;
+  templateCanvas: any;
+  templateContext: any;
 }
 
 export const initialState = {
@@ -18,6 +20,8 @@ export const initialState = {
   modeType: MODE_TYPES.LINE,
   canvasHistory: [],
   canvasHistoryOfReconvery: [],
+  templateCanvas: null,
+  templateContext: null,
 };
 
 export interface IAction {
@@ -61,6 +65,16 @@ export function reducer(state = initialState, action: IAction) {
       return {
         ...state,
         canvasHistoryOfReconvery: action.payload,
+      };
+    case ACTIONS.SET_TEMPLATE_CANVAS:
+      return {
+        ...state,
+        templateCanvas: action.payload,
+      };
+    case ACTIONS.SET__TEMPLATE_CANVAS_CONTEXT:
+      return {
+        ...state,
+        templateContext: action.payload,
       };
     default:
       return {

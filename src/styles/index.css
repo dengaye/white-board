@@ -19,3 +19,9 @@ body,
   overflow: hidden;
   user-select: none;
 }
+
+#template-canvas {
+  position: absolute;
+  top: 0;
+  left: 0;
+}

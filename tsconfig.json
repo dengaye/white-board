@@ -23,7 +23,8 @@
       "@util/*": ["src/utils/*"],
       "@image/*": ["src/images/*"],
       "@component/*": ["src/components/*"],
-      "@style/*": ["src/styles/*"]
+      "@style/*": ["src/styles/*"],
+      "@hook/*": ["src/hooks/*"]
     },
     "resolveJsonModule": true,
     "esModuleInterop": true

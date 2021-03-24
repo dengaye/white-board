@@ -34,3 +34,13 @@ export const setCanvasHistoryOfReconveryByAction = (payload: any) => ({
   type: ACTIONS.SET_CANVAS_HISTORY_OF_RECONVERY,
   payload,
 });
+
+export const setTemplateCanvasByAction = (payload: any) => ({
+  type: ACTIONS.SET_TEMPLATE_CANVAS,
+  payload,
+});
+
+export const setTemplateContextByAction = (payload: any) => ({
+  type: ACTIONS.SET__TEMPLATE_CANVAS_CONTEXT,
+  payload,
+});

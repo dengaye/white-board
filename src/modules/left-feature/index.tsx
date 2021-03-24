@@ -17,4 +17,4 @@ const LeftFeature = () => (
   </div>
 );
 
-export default React.memo(LeftFeature);
+export default LeftFeature;
