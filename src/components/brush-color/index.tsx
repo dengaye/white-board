@@ -13,14 +13,14 @@ const Brush = () => {
   const [showModal, setShowModal] = useState(false);
 
   const handleBrushClick = (color: string, flag: boolean) => {
-    if (flag) {
+    if (flag && modeType !== MODE_TYPES.ERASER) {
       setShowModal(true);
     } else {
       setShowModal(false);
       dispatch(setBrushColorByAction(color));
-      if (modeType === MODE_TYPES.ERASER) {
-        dispatch(setModeTypeByAction(MODE_TYPES.LINE));
-      }
+    }
+    if (modeType === MODE_TYPES.ERASER) {
+      dispatch(setModeTypeByAction(MODE_TYPES.LINE));
     }
   };
 
