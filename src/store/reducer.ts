@@ -17,7 +17,7 @@ export const initialState = {
   canvasContext: null,
   brushColor: BRUSH_COLORS[0],
   lineWidth: BRUSH_SIZES[0],
-  modeType: MODE_TYPES.LINE,
+  modeType: MODE_TYPES.PENCIL,
   canvasHistory: [],
   canvasHistoryOfReconvery: [],
   templateCanvas: null,

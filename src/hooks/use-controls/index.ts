@@ -31,7 +31,7 @@ const useControls = () => {
     const initEvent = touchable ? touchEvent : mouseEvent;
     let handleEvent: any = {};
     switch (modeType) {
-      case MODE_TYPES.LINE:
+      case MODE_TYPES.PENCIL:
         handleEvent = handleDrapPencil;
         break;
       case MODE_TYPES.ERASER:

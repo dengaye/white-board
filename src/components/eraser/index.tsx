@@ -18,7 +18,7 @@ const Eraser = () => {
       if (!isEraser) {
         dispatch(setModeTypeByAction(MODE_TYPES.ERASER));
       } else {
-        dispatch(setModeTypeByAction(MODE_TYPES.LINE));
+        dispatch(setModeTypeByAction(MODE_TYPES.PENCIL));
       }
     }
   };

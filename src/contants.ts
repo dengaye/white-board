@@ -5,14 +5,16 @@ export const COLORS_MODAL = ['#a3ddcb', '#e8e9a1', '#e6b566', '#e56f7e'];
 export const BRUSH_SIZES = [2, 5, 10];
 
 export const MODE_TYPES = {
-  ERASER: 'ERASER',
+  ERASER: 'eraser',
   ROUND: 'round',
-  LINE: 'line',
+  PENCIL: 'pencil',
+  // LINE: 'line',
 };
 
 export const SHAPE_TYPE = {
   ROUND: 'round',
-  LINE: 'line',
+  // LINE: 'line',
+  PENCIL: 'pencil',
 };
 
 export const ACTIONS = {

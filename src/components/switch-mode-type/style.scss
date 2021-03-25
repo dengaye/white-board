@@ -25,6 +25,20 @@
   border-radius: 50%;
 }
 
+.pencil {
+  background: url('../../images/pencil.svg') no-repeat;
+  background-size: cover;
+  width: 18px;
+  height: 18px;
+}
+
+.eraser {
+  background: url('../../images/eraser.svg') no-repeat;
+  background-size: cover;
+  width: 18px;
+  height: 18px;
+}
+
 .fold {
   width: 30px;
   height: 30px;

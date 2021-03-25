@@ -20,7 +20,7 @@ const Brush = () => {
       dispatch(setBrushColorByAction(color));
     }
     if (modeType === MODE_TYPES.ERASER) {
-      dispatch(setModeTypeByAction(MODE_TYPES.LINE));
+      dispatch(setModeTypeByAction(MODE_TYPES.PENCIL));
     }
   };
 
