@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react';
+import React, { useEffect, useRef } from 'react';
 
 import useControl from '@src/hooks/use-controls';
 
@@ -12,9 +12,13 @@ import {
 
 const CanvasContainer = () => {
   const { dispatch } = UseWhiteBoardContext();
+  const canvasRef = useRef<any>(null);
 
   useEffect(() => {
-    const canvasDOM = window.document.getElementById('canvas') as any;
+    if (!canvasRef?.current) {
+      return;
+    }
+    const canvasDOM = canvasRef.current;
     const context = canvasDOM.getContext('2d');
     const container = canvasDOM.parentNode;
     const width = window.innerWidth;
@@ -42,7 +46,7 @@ const CanvasContainer = () => {
 
   useControl();
 
-  return <canvas id='canvas'></canvas>;
+  return <canvas ref={canvasRef}></canvas>;
 };
 
 export default CanvasContainer;
