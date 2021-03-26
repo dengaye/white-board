@@ -34,14 +34,21 @@ export const drawRound = (
   ctx.stroke();
 };
 
-export function drawEllipse(ctx: any, x: number, y: number, w: number, h: number) {
+// https://stackoverflow.com/questions/2172798/how-to-draw-an-oval-in-html5-canvas
+export function drawEllipseByBezierCurveTo(
+  ctx: any,
+  x: number,
+  y: number,
+  disX: number,
+  disY: number
+) {
   const kappa = 0.5522848;
-  const ox = (w / 2) * kappa; // control point offset horizontal
-  const oy = (h / 2) * kappa; // control point offset vertical
-  const xe = x + w; // x-end
-  const ye = y + h; // y-end
-  const xm = x + w / 2; // x-middle
-  const ym = y + h / 2; // y-middle
+  const ox = (disX / 2) * kappa; // control point offset horizontal
+  const oy = (disY / 2) * kappa; // control point offset vertical
+  const xe = x + disX; // x-end
+  const ye = y + disY; // y-end
+  const xm = x + disX / 2; // x-middle
+  const ym = y + disY / 2; // y-middle
 
   ctx.beginPath();
   ctx.moveTo(x, ym);
@@ -50,5 +57,17 @@ export function drawEllipse(ctx: any, x: number, y: number, w: number, h: number
   ctx.bezierCurveTo(xe, ym + oy, xm + ox, ye, xm, ye);
   ctx.bezierCurveTo(xm - ox, ye, x, ym + oy, x, ym);
   ctx.closePath();
+  ctx.stroke();
+}
+
+export function drawEllipse(ctx: any, x: number, y: number, disX: number, disY: number) {
+  ctx.save(); // save state
+  ctx.beginPath();
+
+  ctx.translate(x - disX, y - disY);
+  ctx.scale(disX, disY);
+  ctx.arc(1, 1, 1, 0, 2 * Math.PI, false);
+
+  ctx.restore(); // restore to original state
   ctx.stroke();
 }
