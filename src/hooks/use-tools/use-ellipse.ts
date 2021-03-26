@@ -1,14 +1,14 @@
 import { UseWhiteBoardContext } from '@src/store';
 import { getEvent } from '@util/util';
 import { useCommonTools } from '@src/hooks/use-tools';
-import { drawRound } from '@util/draw';
+import { drawEllipse } from '@util/draw';
 
-const useRound = () => {
+const useEllipse = () => {
   const { state } = UseWhiteBoardContext();
   const { updateImage, savaDataURLToHistory } = useCommonTools();
   const { templateContext, brushColor, lineWidth, templateCanvas } = state;
   let currX = 0;
-  // let currY = 0;
+  let currY = 0;
   let flag = false;
   let canMoveEvent = false;
   let startX = 0;
@@ -16,21 +16,15 @@ const useRound = () => {
 
   const draw = () => {
     templateContext.clearRect(0, 0, templateCanvas.width, templateCanvas.height);
-    const radius = Math.abs(currX - startX + lineWidth);
-    drawRound(
-      templateContext,
-      startX + (currX - startX + lineWidth),
-      startY,
-      radius,
-      brushColor,
-      lineWidth
-    );
+    templateContext.lineWidth = lineWidth;
+    templateContext.strokeStyle = brushColor;
+    drawEllipse(templateContext, startX, startY, currX - startX, currY - startY);
   };
 
   const start = (e: any) => {
     const _event = getEvent(e);
     currX = _event.clientX;
-    // currY = _event.clientY;
+    currY = _event.clientY;
     flag = true;
     startX = _event.clientX;
     startY = _event.clientY;
@@ -41,7 +35,7 @@ const useRound = () => {
       canMoveEvent = true;
       const _event = getEvent(e);
       currX = _event.clientX;
-      // currY = _event.clientY;
+      currY = _event.clientY;
       draw();
     }
   };
@@ -62,4 +56,4 @@ const useRound = () => {
   return { start, move, end };
 };
 
-export default useRound;
+export default useEllipse;

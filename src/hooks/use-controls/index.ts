@@ -2,7 +2,7 @@ import { useEffect } from 'react';
 import { UseWhiteBoardContext } from '@src/store';
 import { touchable } from '@util/util';
 import { MODE_TYPES } from '@src/contants';
-import { usePencil, useRound, useEraser } from '@src/hooks/use-tools';
+import { usePencil, useEllipse, useEraser } from '@src/hooks/use-tools';
 
 const touchEvent = {
   start: 'touchstart',
@@ -20,9 +20,9 @@ const useControls = () => {
   const { state } = UseWhiteBoardContext();
   const { canvas, templateCanvas, modeType } = state;
 
-  const handleDrapPencil = usePencil();
-  const handleDrawRound = useRound();
-  const handleEraser = useEraser();
+  const pencilEvent = usePencil();
+  const ellipseEvent = useEllipse();
+  const eraserEvent = useEraser();
 
   useEffect(() => {
     if (!canvas && !templateCanvas) {
@@ -32,16 +32,16 @@ const useControls = () => {
     let handleEvent: any = {};
     switch (modeType) {
       case MODE_TYPES.PENCIL:
-        handleEvent = handleDrapPencil;
+        handleEvent = pencilEvent;
         break;
       case MODE_TYPES.ERASER:
-        handleEvent = handleEraser;
+        handleEvent = eraserEvent;
         break;
-      case MODE_TYPES.ROUND:
-        handleEvent = handleDrawRound;
+      case MODE_TYPES.ELLIPSE:
+        handleEvent = ellipseEvent;
         break;
       default:
-        handleEvent = handleDrapPencil;
+        handleEvent = pencilEvent;
         break;
     }
     templateCanvas.addEventListener(initEvent.start, handleEvent.start);

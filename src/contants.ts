@@ -6,13 +6,13 @@ export const BRUSH_SIZES = [2, 5, 10];
 
 export const MODE_TYPES = {
   ERASER: 'eraser',
-  ROUND: 'round',
+  ELLIPSE: 'ellipse',
   PENCIL: 'pencil',
   // LINE: 'line',
 };
 
 export const SHAPE_TYPE = {
-  ROUND: 'round',
+  ELLIPSE: 'ellipse',
   // LINE: 'line',
   PENCIL: 'pencil',
 };
