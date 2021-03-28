@@ -1,7 +1,7 @@
 import React, { useState, useCallback } from 'react';
 
-import { BRUSH_COLORS, MODE_TYPES } from '@src/contants';
-import { setBrushColorByAction, setModeTypeByAction, UseWhiteBoardContext } from '@src/store';
+import { BRUSH_COLORS, MODE_TYPES, ACTIONS } from '@src/contants';
+import { UseWhiteBoardContext } from '@src/store';
 import ColorModal from '@component/color-modal';
 
 import style from '@style/brush.scss';
@@ -17,15 +17,24 @@ const Brush = () => {
       setShowModal(true);
     } else {
       setShowModal(false);
-      dispatch(setBrushColorByAction(color));
+      dispatch({
+        type: ACTIONS.SET_BRUSH_COLOR,
+        payload: color,
+      });
     }
     if (modeType === MODE_TYPES.ERASER) {
-      dispatch(setModeTypeByAction(MODE_TYPES.PENCIL));
+      dispatch({
+        type: ACTIONS.SET_MODE_TYPE,
+        payload: MODE_TYPES.PENCIL,
+      });
     }
   };
 
   const handleSelectColor = useCallback((item: string) => {
-    dispatch(setBrushColorByAction(item));
+    dispatch({
+      type: ACTIONS.SET_BRUSH_COLOR,
+      payload: item,
+    });
     setSelectColor(item);
     setShowModal(false);
   }, []);

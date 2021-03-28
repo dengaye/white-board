@@ -1,14 +1,7 @@
 import React, { useEffect, useRef } from 'react';
 
 import useControl from '@src/hooks/use-controls';
-
-import {
-  setCanvasByAction,
-  setCanvasContextByAction,
-  UseWhiteBoardContext,
-  setTemplateCanvasByAction,
-  setTemplateContextByAction,
-} from '@src/store';
+import { UseWhiteBoardContext, ACTIONS } from '@src/store';
 
 const CanvasContainer = () => {
   const { dispatch } = UseWhiteBoardContext();
@@ -35,13 +28,13 @@ const CanvasContainer = () => {
       templateCanvasDOM.width = width;
       templateCanvasDOM.height = height;
       container.appendChild(templateCanvasDOM);
-      dispatch(setTemplateCanvasByAction(templateCanvasDOM));
-      dispatch(setTemplateContextByAction(templateContext));
+      dispatch({ type: ACTIONS.SET_TEMPLATE_CANVAS, payload: templateCanvasDOM });
+      dispatch({ type: ACTIONS.SET__TEMPLATE_CANVAS_CONTEXT, payload: templateContext });
     }
 
     createTemplateCanvas();
-    dispatch(setCanvasByAction(canvasDOM));
-    dispatch(setCanvasContextByAction(context));
+    dispatch({ type: ACTIONS.SET_CANVAS, payload: canvasDOM });
+    dispatch({ type: ACTIONS.SET_CANVAS_CONTEXT, payload: context });
   }, []);
 
   useControl();

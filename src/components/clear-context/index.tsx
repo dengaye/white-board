@@ -1,11 +1,7 @@
 import React from 'react';
 
 import DeleteSvg from '@image/delete.svg';
-import {
-  setCanvasHistoryByAction,
-  setCanvasHistoryOfReconveryByAction,
-  UseWhiteBoardContext,
-} from '@src/store';
+import { UseWhiteBoardContext, ACTIONS } from '@src/store';
 
 import s from '@style/common.scss';
 
@@ -17,8 +13,14 @@ const ClearContext = () => {
     if (canvas) {
       const width = canvas.width;
       const height = canvas.height;
-      dispatch(setCanvasHistoryByAction([...canvasHistory, canvas.toDataURL()]));
-      dispatch(setCanvasHistoryOfReconveryByAction([...canvasHistoryOfReconvery, '']));
+      dispatch({
+        type: ACTIONS.SET_CANVAS_HISTORY,
+        payload: [...canvasHistory, canvas.toDataURL()],
+      });
+      dispatch({
+        type: ACTIONS.SET_CANVAS_HISTORY_OF_RECONVERY,
+        payload: [...canvasHistoryOfReconvery, ''],
+      });
       canvasContext.clearRect(0, 0, width, height);
     }
   };

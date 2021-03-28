@@ -3,7 +3,7 @@ import Modal from '@component/modal';
 import Slider from '@component/slider';
 import style from './style.scss';
 
-import { setLineWidthByAction, UseWhiteBoardContext } from '@src/store';
+import { ACTIONS, UseWhiteBoardContext } from '@src/store';
 
 interface ISizeModalProps {
   visible: boolean;
@@ -15,7 +15,10 @@ const SizeModal = (props: ISizeModalProps) => {
   const { visible } = props;
 
   const updateValue = useCallback((value: number) => {
-    dispatch(setLineWidthByAction(value));
+    dispatch({
+      type: ACTIONS.SET_LINE_WIDTH,
+      payload: value,
+    });
   }, []);
 
   return (

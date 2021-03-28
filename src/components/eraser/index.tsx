@@ -1,6 +1,6 @@
 import React, { useMemo } from 'react';
 
-import { setModeTypeByAction, UseWhiteBoardContext } from '@src/store';
+import { UseWhiteBoardContext, ACTIONS } from '@src/store';
 import { MODE_TYPES } from '@src/contants';
 import EraserSvg from '@image/eraser.svg';
 
@@ -16,9 +16,9 @@ const Eraser = () => {
   const handleEraser = () => {
     if (canvas) {
       if (!isEraser) {
-        dispatch(setModeTypeByAction(MODE_TYPES.ERASER));
+        dispatch({ type: ACTIONS.SET_MODE_TYPE, payload: MODE_TYPES.ERASER });
       } else {
-        dispatch(setModeTypeByAction(MODE_TYPES.PENCIL));
+        dispatch({ type: ACTIONS.SET_MODE_TYPE, payload: MODE_TYPES.PENCIL });
       }
     }
   };

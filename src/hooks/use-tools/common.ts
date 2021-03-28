@@ -1,4 +1,4 @@
-import { UseWhiteBoardContext, setCanvasHistoryByAction } from '@src/store';
+import { UseWhiteBoardContext, ACTIONS } from '@src/store';
 
 function useCommonTools() {
   const { dispatch, state } = UseWhiteBoardContext();
@@ -11,7 +11,7 @@ function useCommonTools() {
   function savaDataURLToHistory() {
     const newCanvasHistory = [...canvasHistory];
     newCanvasHistory.push(canvas.toDataURL());
-    dispatch(setCanvasHistoryByAction(newCanvasHistory));
+    dispatch({ type: ACTIONS.SET_CANVAS_HISTORY, payload: newCanvasHistory });
   }
   return { updateImage, savaDataURLToHistory };
 }

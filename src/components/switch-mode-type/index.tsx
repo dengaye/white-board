@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import { SHAPE_TYPE } from '@src/contants';
-import { setModeTypeByAction, UseWhiteBoardContext } from '@src/store';
+import { UseWhiteBoardContext, ACTIONS } from '@src/store';
 
 import style from './style.scss';
 
@@ -14,7 +14,7 @@ const SwitchModeType = () => {
   };
 
   const handleShape = (type: string) => {
-    dispatch(setModeTypeByAction(type));
+    dispatch({ type: ACTIONS.SET_MODE_TYPE, payload: type });
     setShow(false);
   };
 

@@ -2,11 +2,7 @@ import React from 'react';
 
 import ArrowLeftSvg from '@image/arrow-left.svg';
 import ArrowRightSvg from '@image/arrow-right.svg';
-import {
-  setCanvasHistoryByAction,
-  setCanvasHistoryOfReconveryByAction,
-  UseWhiteBoardContext,
-} from '@src/store';
+import { UseWhiteBoardContext, ACTIONS } from '@src/store';
 
 import s from '@style/common.scss';
 
@@ -29,9 +25,12 @@ const RevokeAndReconvery = () => {
       const pop = newDataUrl.pop();
       const uri = newDataUrl[newDataUrl.length - 1];
       reDraw(uri);
-      dispatch(setCanvasHistoryByAction(newDataUrl));
+      dispatch({ type: ACTIONS.SET_CANVAS_HISTORY, payload: newDataUrl });
       if (canvasHistoryOfReconvery[canvasHistoryOfReconvery.length - 1] !== '') {
-        dispatch(setCanvasHistoryOfReconveryByAction([...canvasHistoryOfReconvery, pop]));
+        dispatch({
+          type: ACTIONS.SET_CANVAS_HISTORY_OF_RECONVERY,
+          payload: [...canvasHistoryOfReconvery, pop],
+        });
       }
     }
   };
@@ -42,8 +41,8 @@ const RevokeAndReconvery = () => {
       const uri = newDataUrl[newDataUrl.length - 1];
       const pop = newDataUrl.pop();
       reDraw(uri);
-      dispatch(setCanvasHistoryOfReconveryByAction(newDataUrl));
-      dispatch(setCanvasHistoryByAction([...canvasHistory, pop]));
+      dispatch({ type: ACTIONS.SET_CANVAS_HISTORY_OF_RECONVERY, payload: newDataUrl });
+      dispatch({ type: ACTIONS.SET_CANVAS_HISTORY, payload: [...canvasHistory, pop] });
     }
   };
 

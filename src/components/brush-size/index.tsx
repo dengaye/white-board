@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 
-import { BRUSH_SIZES } from '@src/contants';
-import { setLineWidthByAction, UseWhiteBoardContext } from '@src/store';
+import { ACTIONS, BRUSH_SIZES } from '@src/contants';
+import { UseWhiteBoardContext } from '@src/store';
 import { getWidthOrHeightOfSize } from '@util/util';
 import SizeModal from '@component/size-modal';
 
@@ -16,7 +16,10 @@ const BrushColor = () => {
     if (flag) {
       setShowSizeModal(true);
     } else {
-      dispatch(setLineWidthByAction(size));
+      dispatch({
+        type: ACTIONS.SET_LINE_WIDTH,
+        payload: size,
+      });
       setShowSizeModal(false);
     }
   };
