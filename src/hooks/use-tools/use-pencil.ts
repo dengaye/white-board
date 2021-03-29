@@ -1,5 +1,6 @@
 import { UseWhiteBoardContext } from '@src/store';
 import { getEvent } from '@util/util';
+import { drawLine } from '@util/draw';
 import { useCommonTools } from '@src/hooks/use-tools';
 
 const usePencil = () => {
@@ -10,28 +11,30 @@ const usePencil = () => {
   let currY = 0;
   let flag = false;
   let canMoveEvent = false;
+  let prevX = 0;
+  let prevY = 0;
 
   const draw = () => {
-    templateContext.lineTo(currX, currY);
     templateContext.strokeStyle = brushColor;
     templateContext.lineWidth = lineWidth;
-    templateContext.lineCap = 'round';
-    templateContext.stroke();
+    drawLine(templateContext, prevX, prevY, currX, currY);
     updateImage();
   };
 
   const start = (e: any) => {
+    prevX = currX;
+    prevY = currY;
     const _event = getEvent(e);
     currX = _event.clientX;
     currY = _event.clientY;
     flag = true;
-    templateContext.beginPath();
-    templateContext.moveTo(_event.clientX, _event.clientY);
   };
 
   const move = (e: any) => {
     if (flag) {
       canMoveEvent = true;
+      prevX = currX;
+      prevY = currY;
       const _event = getEvent(e);
       currX = _event.clientX;
       currY = _event.clientY;
@@ -43,6 +46,8 @@ const usePencil = () => {
     if (canMoveEvent) {
       canMoveEvent = false;
     } else {
+      prevX = currX;
+      prevY = currY;
       draw();
     }
     if (flag) {
