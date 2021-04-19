@@ -1,0 +1,4 @@
+{
+  "appEnter": "./src/index.tsx",
+  "useDefaultTsConfig": true
+}

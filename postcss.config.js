@@ -1,6 +1,6 @@
 module.exports = {
-  plugins: {
-    'postcss-px-to-viewport': {
+  plugins: [
+    require('postcss-px-to-viewport')({
       unitToConvert: 'px',
       viewportWidth: 375,
       unitPrecision: 5,
@@ -13,6 +13,6 @@ module.exports = {
       replace: true,
       landscape: false,
       landscapeUnit: 'vw',
-    },
-  },
+    })
+  ]
 };
