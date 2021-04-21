@@ -1,26 +1,30 @@
 import React from 'react';
+import { useRecoilState, useRecoilValue } from 'recoil';
 
 import DeleteSvg from '@image/delete.svg';
-import { UseWhiteBoardContext, ACTIONS } from '@src/store';
+import {
+  canvasHistoryState,
+  canvasState,
+  canvasContextState,
+  canvasHistoryOfReconveryState,
+} from 'src/recoil';
 
 import s from '@style/common.scss';
 
 const ClearContext = () => {
-  const { dispatch, state } = UseWhiteBoardContext();
-  const { canvasHistory, canvas, canvasContext, canvasHistoryOfReconvery } = state;
+  const [canvasHistory, setCanvasHistory] = useRecoilState(canvasHistoryState);
+  const [canvasHistoryOfReconvery, setCanvasHistoryOfReconvery] = useRecoilState(
+    canvasHistoryOfReconveryState
+  );
+  const canvas = useRecoilValue(canvasState);
+  const canvasContext = useRecoilValue(canvasContextState);
 
   const handleClear = () => {
     if (canvas) {
       const width = canvas.width;
       const height = canvas.height;
-      dispatch({
-        type: ACTIONS.SET_CANVAS_HISTORY,
-        payload: [...canvasHistory, canvas.toDataURL()],
-      });
-      dispatch({
-        type: ACTIONS.SET_CANVAS_HISTORY_OF_RECONVERY,
-        payload: [...canvasHistoryOfReconvery, ''],
-      });
+      setCanvasHistory([...canvasHistory, canvas.toDataURL()]);
+      setCanvasHistoryOfReconvery([...canvasHistoryOfReconvery, '']);
       canvasContext.clearRect(0, 0, width, height);
     }
   };

@@ -2,7 +2,6 @@ import React, { useState } from 'react';
 import Modal from '@component/modal';
 import Slider from '@component/slider';
 import { COLORS_MODAL } from '@src/contants';
-import { UseWhiteBoardContext } from '@src/store';
 
 import style from './style.scss';
 
@@ -10,6 +9,7 @@ interface IColorModalProps {
   visible: boolean;
   onCancel: () => void;
   updateColor: (color: string) => void;
+  brushColor: string;
 }
 
 interface ISliderItem {
@@ -20,8 +20,7 @@ interface ISliderItem {
 }
 
 function ColorModal(props: IColorModalProps) {
-  const { visible } = props;
-  const { state } = UseWhiteBoardContext();
+  const { visible, brushColor } = props;
   const [red, setRed] = useState(0);
   const [green, setGreen] = useState(0);
   const [blue, setBlue] = useState(0);
@@ -61,9 +60,7 @@ function ColorModal(props: IColorModalProps) {
           {COLORS_MODAL.map((item: string) => (
             <div
               key={item}
-              className={`${style.selectColorItem} ${
-                state.brushColor === item ? style.active : ''
-              }`}
+              className={`${style.selectColorItem} ${brushColor === item ? style.active : ''}`}
               style={{ backgroundColor: item }}
               onClick={() => props.updateColor(item)}
             ></div>

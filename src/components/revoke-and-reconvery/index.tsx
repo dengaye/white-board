@@ -1,14 +1,24 @@
 import React from 'react';
+import { useRecoilState, useRecoilValue } from 'recoil';
 
 import ArrowLeftSvg from '@image/arrow-left.svg';
 import ArrowRightSvg from '@image/arrow-right.svg';
-import { UseWhiteBoardContext, ACTIONS } from '@src/store';
+import {
+  canvasHistoryState,
+  canvasState,
+  canvasContextState,
+  canvasHistoryOfReconveryState,
+} from 'src/recoil';
 
 import s from '@style/common.scss';
 
 const RevokeAndReconvery = () => {
-  const { dispatch, state } = UseWhiteBoardContext();
-  const { canvasHistory, canvas, canvasContext, canvasHistoryOfReconvery } = state;
+  const [canvasHistory, setCanvasHistory] = useRecoilState(canvasHistoryState);
+  const [canvasHistoryOfReconvery, setCanvasHistoryOfReconvery] = useRecoilState(
+    canvasHistoryOfReconveryState
+  );
+  const canvas = useRecoilValue(canvasState);
+  const canvasContext = useRecoilValue(canvasContextState);
 
   const reDraw = (uri: string) => {
     canvasContext.clearRect(0, 0, canvas.offsetWidth, canvas.offsetHeight);
@@ -25,12 +35,9 @@ const RevokeAndReconvery = () => {
       const pop = newDataUrl.pop();
       const uri = newDataUrl[newDataUrl.length - 1];
       reDraw(uri);
-      dispatch({ type: ACTIONS.SET_CANVAS_HISTORY, payload: newDataUrl });
+      setCanvasHistory(newDataUrl);
       if (canvasHistoryOfReconvery[canvasHistoryOfReconvery.length - 1] !== '') {
-        dispatch({
-          type: ACTIONS.SET_CANVAS_HISTORY_OF_RECONVERY,
-          payload: [...canvasHistoryOfReconvery, pop],
-        });
+        setCanvasHistoryOfReconvery([...canvasHistoryOfReconvery, pop]);
       }
     }
   };
@@ -41,8 +48,8 @@ const RevokeAndReconvery = () => {
       const uri = newDataUrl[newDataUrl.length - 1];
       const pop = newDataUrl.pop();
       reDraw(uri);
-      dispatch({ type: ACTIONS.SET_CANVAS_HISTORY_OF_RECONVERY, payload: newDataUrl });
-      dispatch({ type: ACTIONS.SET_CANVAS_HISTORY, payload: [...canvasHistory, pop] });
+      setCanvasHistoryOfReconvery(newDataUrl);
+      setCanvasHistory([...canvasHistory, pop]);
     }
   };
 

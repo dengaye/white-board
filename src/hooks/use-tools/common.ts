@@ -1,8 +1,18 @@
-import { UseWhiteBoardContext, ACTIONS } from '@src/store';
+import { useRecoilValue, useRecoilState } from 'recoil';
+import {
+  canvasState,
+  canvasContextState,
+  canvasHistoryState,
+  templateCanvasState,
+  templateContextState,
+} from 'src/recoil';
 
 function useCommonTools() {
-  const { dispatch, state } = UseWhiteBoardContext();
-  const { canvas, canvasContext, canvasHistory, templateCanvas, templateContext } = state;
+  const canvas = useRecoilValue(canvasState);
+  const canvasContext = useRecoilValue(canvasContextState);
+  const templateCanvas = useRecoilValue(templateCanvasState);
+  const templateContext = useRecoilValue(templateContextState);
+  const [canvasHistory, setCanvasHistory] = useRecoilState(canvasHistoryState);
   function updateImage() {
     canvasContext.drawImage(templateCanvas, 0, 0);
     templateContext.clearRect(0, 0, templateCanvas.width, templateCanvas.height);
@@ -11,7 +21,7 @@ function useCommonTools() {
   function savaDataURLToHistory() {
     const newCanvasHistory = [...canvasHistory];
     newCanvasHistory.push(canvas.toDataURL());
-    dispatch({ type: ACTIONS.SET_CANVAS_HISTORY, payload: newCanvasHistory });
+    setCanvasHistory(newCanvasHistory);
   }
   return { updateImage, savaDataURLToHistory };
 }

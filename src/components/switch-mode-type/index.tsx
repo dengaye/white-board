@@ -1,12 +1,12 @@
 import React, { useState } from 'react';
+import { useRecoilState } from 'recoil';
 import { SHAPE_TYPE } from '@src/contants';
-import { UseWhiteBoardContext, ACTIONS } from '@src/store';
+import { modeTypeState } from 'src/recoil';
 
 import style from './style.scss';
 
 const SwitchModeType = () => {
-  const { dispatch, state } = UseWhiteBoardContext();
-  const { modeType } = state;
+  const [modeType, setModeType] = useRecoilState(modeTypeState);
   const [show, setShow] = useState(false);
 
   const handleFold = () => {
@@ -14,7 +14,7 @@ const SwitchModeType = () => {
   };
 
   const handleShape = (type: string) => {
-    dispatch({ type: ACTIONS.SET_MODE_TYPE, payload: type });
+    setModeType(type);
     setShow(false);
   };
 

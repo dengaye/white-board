@@ -1,24 +1,25 @@
 import React, { useMemo } from 'react';
+import { useRecoilState, useRecoilValue } from 'recoil';
 
-import { UseWhiteBoardContext, ACTIONS } from '@src/store';
 import { MODE_TYPES } from '@src/contants';
 import EraserSvg from '@image/eraser.svg';
+import { canvasState, modeTypeState } from 'src/recoil';
 
 import s from '@style/common.scss';
 import s1 from './style.scss';
 
 const Eraser = () => {
-  const { dispatch, state } = UseWhiteBoardContext();
-  const { modeType, canvas } = state;
+  const canvas = useRecoilValue(canvasState);
+  const [modeType, setModeType] = useRecoilState(modeTypeState);
 
   const isEraser = useMemo(() => modeType === MODE_TYPES.ERASER, [modeType]);
 
   const handleEraser = () => {
     if (canvas) {
       if (!isEraser) {
-        dispatch({ type: ACTIONS.SET_MODE_TYPE, payload: MODE_TYPES.ERASER });
+        setModeType(MODE_TYPES.ERASER);
       } else {
-        dispatch({ type: ACTIONS.SET_MODE_TYPE, payload: MODE_TYPES.PENCIL });
+        setModeType(MODE_TYPES.PENCIL);
       }
     }
   };

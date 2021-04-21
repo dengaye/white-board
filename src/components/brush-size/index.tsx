@@ -1,25 +1,22 @@
 import React, { useState } from 'react';
+import { useRecoilState } from 'recoil';
 
-import { ACTIONS, BRUSH_SIZES } from '@src/contants';
-import { UseWhiteBoardContext } from '@src/store';
+import { BRUSH_SIZES } from '@src/contants';
 import { getWidthOrHeightOfSize } from '@util/util';
 import SizeModal from '@component/size-modal';
+import { lineWidthState } from 'src/recoil';
 
 import style from '@style/brush.scss';
 
 const BrushColor = () => {
-  const { dispatch, state } = UseWhiteBoardContext();
-  const { lineWidth } = state;
+  const [lineWidth, setLineWidth] = useRecoilState(lineWidthState);
   const [showSizeModal, setShowSizeModal] = useState(false);
 
   const handleBrushSize = (size: number, flag: boolean) => {
     if (flag) {
       setShowSizeModal(true);
     } else {
-      dispatch({
-        type: ACTIONS.SET_LINE_WIDTH,
-        payload: size,
-      });
+      setLineWidth(size);
       setShowSizeModal(false);
     }
   };
@@ -44,7 +41,12 @@ const BrushColor = () => {
           </div>
         ))}
       </div>
-      <SizeModal visible={showSizeModal} onCancel={() => setShowSizeModal(false)} />
+      <SizeModal
+        visible={showSizeModal}
+        onCancel={() => setShowSizeModal(false)}
+        updateSize={setLineWidth}
+        lineWidth={lineWidth}
+      />
     </>
   );
 };

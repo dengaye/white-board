@@ -1,13 +1,15 @@
 import { useEffect } from 'react';
-import { UseWhiteBoardContext } from '@src/store';
+import { useRecoilValue } from 'recoil';
 import { getEvent } from '@util/util';
 import { drawLine } from '@util/draw';
 import { useCommonTools } from '@src/hooks/use-tools';
+import { templateContextState, brushColorState, lineWidthState } from 'src/recoil';
 
 const usePencil = () => {
-  const { state } = UseWhiteBoardContext();
+  const templateContext = useRecoilValue(templateContextState);
+  const brushColor = useRecoilValue(brushColorState);
+  const lineWidth = useRecoilValue(lineWidthState);
   const { updateImage, savaDataURLToHistory } = useCommonTools();
-  const { templateContext, brushColor, lineWidth } = state;
   let currX = 0;
   let currY = 0;
   let flag = false;

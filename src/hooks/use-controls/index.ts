@@ -1,8 +1,9 @@
 import { useEffect } from 'react';
-import { UseWhiteBoardContext } from '@src/store';
+import { useRecoilValue } from 'recoil';
 import { touchable } from '@util/util';
 import { MODE_TYPES } from '@src/contants';
 import { usePencil, useEllipse, useEraser } from '@src/hooks/use-tools';
+import { canvasState, templateCanvasState, modeTypeState } from 'src/recoil';
 
 const touchEvent = {
   start: 'touchstart',
@@ -17,8 +18,9 @@ const mouseEvent = {
 };
 
 const useControls = () => {
-  const { state } = UseWhiteBoardContext();
-  const { canvas, templateCanvas, modeType } = state;
+  const canvas = useRecoilValue(canvasState);
+  const templateCanvas = useRecoilValue(templateCanvasState);
+  const modeType = useRecoilValue(modeTypeState);
 
   const pencilEvent = usePencil();
   const ellipseEvent = useEllipse();
@@ -58,7 +60,7 @@ const useControls = () => {
         templateCanvas.removeEventListener('mouseout', handleEvent.end);
       }
     };
-  }, [state]);
+  });
 
   return null;
 };

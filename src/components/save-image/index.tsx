@@ -1,8 +1,9 @@
 import React from 'react';
+import { useRecoilValue } from 'recoil';
 
-import { UseWhiteBoardContext } from '@src/store';
 import { downloadFile } from '@util/util';
 import DownloadSvg from '@image/download.svg';
+import { canvasState } from 'src/recoil';
 
 import style from './style.module.scss';
 
@@ -10,10 +11,8 @@ interface ISaveImage {
   className?: string;
 }
 
-const saveImage = (props: ISaveImage) => {
-  const {
-    state: { canvas },
-  } = UseWhiteBoardContext();
+const SaveImage = (props: ISaveImage) => {
+  const canvas = useRecoilValue(canvasState);
 
   const handleDownload = () => {
     if (canvas) {
@@ -29,4 +28,4 @@ const saveImage = (props: ISaveImage) => {
   );
 };
 
-export default React.memo(saveImage);
+export default React.memo(SaveImage);

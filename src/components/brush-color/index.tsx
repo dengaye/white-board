@@ -1,14 +1,15 @@
 import React, { useState, useCallback } from 'react';
+import { useRecoilState } from 'recoil';
 
-import { BRUSH_COLORS, MODE_TYPES, ACTIONS } from '@src/contants';
-import { UseWhiteBoardContext } from '@src/store';
+import { BRUSH_COLORS, MODE_TYPES } from '@src/contants';
 import ColorModal from '@component/color-modal';
+import { brushColorState, modeTypeState } from 'src/recoil';
 
 import style from '@style/brush.scss';
 
 const Brush = () => {
-  const { dispatch, state } = UseWhiteBoardContext();
-  const { brushColor, modeType } = state;
+  const [brushColor, setBrushColor] = useRecoilState(brushColorState);
+  const [modeType, setModeType] = useRecoilState(modeTypeState);
   const [selectColor, setSelectColor] = useState('');
   const [showModal, setShowModal] = useState(false);
 
@@ -17,24 +18,15 @@ const Brush = () => {
       setShowModal(true);
     } else {
       setShowModal(false);
-      dispatch({
-        type: ACTIONS.SET_BRUSH_COLOR,
-        payload: color,
-      });
+      setBrushColor(color);
     }
     if (modeType === MODE_TYPES.ERASER) {
-      dispatch({
-        type: ACTIONS.SET_MODE_TYPE,
-        payload: MODE_TYPES.PENCIL,
-      });
+      setModeType(MODE_TYPES.PENCIL);
     }
   };
 
   const handleSelectColor = useCallback((item: string) => {
-    dispatch({
-      type: ACTIONS.SET_BRUSH_COLOR,
-      payload: item,
-    });
+    setBrushColor(item);
     setSelectColor(item);
     setShowModal(false);
   }, []);
@@ -45,9 +37,7 @@ const Brush = () => {
         {[...BRUSH_COLORS, selectColor].map((item: string, index: number) => (
           <div
             key={index}
-            className={
-              brushColor === item && state.modeType !== MODE_TYPES.ERASER ? style.active : ''
-            }
+            className={brushColor === item && modeType !== MODE_TYPES.ERASER ? style.active : ''}
             style={{ backgroundColor: item }}
             onClick={() => {
               handleBrushClick(item, brushColor === item);
@@ -59,6 +49,7 @@ const Brush = () => {
         visible={showModal}
         onCancel={() => setShowModal(false)}
         updateColor={handleSelectColor}
+        brushColor={brushColor}
       />
     </>
   );

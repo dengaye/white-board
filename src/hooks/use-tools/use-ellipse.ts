@@ -1,12 +1,20 @@
-import { UseWhiteBoardContext } from '@src/store';
+import { useRecoilValue } from 'recoil';
 import { getEvent } from '@util/util';
 import { useCommonTools } from '@src/hooks/use-tools';
 import { drawEllipse } from '@util/draw';
+import {
+  lineWidthState,
+  templateContextState,
+  templateCanvasState,
+  brushColorState,
+} from 'src/recoil';
 
 const useEllipse = () => {
-  const { state } = UseWhiteBoardContext();
   const { updateImage, savaDataURLToHistory } = useCommonTools();
-  const { templateContext, brushColor, lineWidth, templateCanvas } = state;
+  const templateContext = useRecoilValue(templateContextState);
+  const templateCanvas = useRecoilValue(templateCanvasState);
+  const brushColor = useRecoilValue(brushColorState);
+  const lineWidth = useRecoilValue(lineWidthState);
   let currX = 0;
   let currY = 0;
   let flag = false;

@@ -1,11 +1,15 @@
-import { UseWhiteBoardContext } from '@src/store';
+import { useRecoilValue } from 'recoil';
 import { getEvent } from '@util/util';
 import { useCommonTools } from '@src/hooks/use-tools';
+import { lineWidthState, templateContextState, canvasState, canvasContextState } from 'src/recoil';
 
 const useEraser = () => {
-  const { state } = UseWhiteBoardContext();
   const { updateImage, savaDataURLToHistory } = useCommonTools();
-  const { templateContext, canvasContext, lineWidth, canvas } = state;
+  const templateContext = useRecoilValue(templateContextState);
+  const canvas = useRecoilValue(canvasState);
+  const canvasContext = useRecoilValue(canvasContextState);
+  const lineWidth = useRecoilValue(lineWidthState);
+
   let currX = 0;
   let currY = 0;
   let flag = false;

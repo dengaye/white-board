@@ -3,32 +3,26 @@ import Modal from '@component/modal';
 import Slider from '@component/slider';
 import style from './style.scss';
 
-import { ACTIONS, UseWhiteBoardContext } from '@src/store';
-
 interface ISizeModalProps {
   visible: boolean;
   onCancel: () => void;
+  updateSize: (size: number) => void;
+  lineWidth: number;
 }
 
 const SizeModal = (props: ISizeModalProps) => {
-  const { dispatch, state } = UseWhiteBoardContext();
-  const { visible } = props;
+  const { visible, lineWidth } = props;
 
-  const updateValue = useCallback((value: number) => {
-    dispatch({
-      type: ACTIONS.SET_LINE_WIDTH,
-      payload: value,
-    });
-  }, []);
+  const updateValue = useCallback((value: number) => props.updateSize(value), []);
 
   return (
     <Modal visible={visible} onCancel={props.onCancel}>
-      <Slider value={state.lineWidth} updateValue={updateValue} />
+      <Slider value={lineWidth} updateValue={updateValue} />
       <section className={style.sizeContent}>
         <span
           style={{
-            width: `${state.lineWidth}px`,
-            height: `${state.lineWidth}px`,
+            width: `${lineWidth}px`,
+            height: `${lineWidth}px`,
           }}
         ></span>
       </section>
