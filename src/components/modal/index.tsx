@@ -1,4 +1,6 @@
 import React from 'react';
+import SvgIcon from '@src/components/svg-icon';
+import Close from '@src/images/close.svg';
 
 export interface IModalProps {
   visible: boolean;
@@ -21,7 +23,7 @@ function Modal(props: IModalProps) {
       <div className={s.modalContent}>
         {showCloseIcon && (
           <div className={s.modalClose} onClick={props.onCancel}>
-            x
+            <SvgIcon url={Close} />
           </div>
         )}
         {children}
