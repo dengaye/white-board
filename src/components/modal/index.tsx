@@ -16,19 +16,17 @@ function Modal(props: IModalProps) {
     return null;
   }
   return (
-    <>
+    <section className={`${s.modalContainer} ${s.animated} ${s.backInUp}`}>
       <div className={s.modalBackdrop} onClick={props.onCancel}></div>
-      <div className={s.modalContainer}>
-        <div className={s.modalContent}>
-          {showCloseIcon && (
-            <div className={s.modalClose} onClick={props.onCancel}>
-              x
-            </div>
-          )}
-          {children}
-        </div>
+      <div className={s.modalContent}>
+        {showCloseIcon && (
+          <div className={s.modalClose} onClick={props.onCancel}>
+            x
+          </div>
+        )}
+        {children}
       </div>
-    </>
+    </section>
   );
 }
 
