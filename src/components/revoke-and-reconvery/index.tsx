@@ -21,14 +21,15 @@ const RevokeAndReconvery = () => {
   const canvasContext = useRecoilValue(canvasContextState);
 
   const reDraw = (uri: string) => {
-    canvasContext.clearRect(0, 0, canvas.offsetWidth, canvas.offsetHeight);
     const image = new window.Image();
     image.src = uri;
     image.addEventListener('load', () => {
+      canvasContext.clearRect(0, 0, canvas.offsetWidth, canvas.offsetHeight);
       canvasContext.drawImage(image, 0, 0);
     });
   };
 
+  // 撤销
   const handleRestore = () => {
     if (canvas && canvasHistory.length) {
       const newDataUrl = [...canvasHistory];
@@ -42,6 +43,7 @@ const RevokeAndReconvery = () => {
     }
   };
 
+  // 悔退
   const handleReconvery = () => {
     if (canvas && canvasHistoryOfReconvery.length) {
       const newDataUrl = [...canvasHistoryOfReconvery];
