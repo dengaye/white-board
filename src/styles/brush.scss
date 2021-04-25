@@ -38,15 +38,15 @@
   }
 
   div {
-    width: 30px;
-    height: 30px;
+    min-width: 30px;
+    min-height: 30px;
     display: flex;
     align-items: center;
     justify-content: center;
 
     &.active {
       span {
-        padding: 2px;
+        padding: 1px;
 
         &::after {
           background-color: #202d40;

@@ -1,8 +1,8 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { useRecoilState } from 'recoil';
 
 import { BRUSH_SIZES } from '@src/contants';
-import { getWidthOrHeightOfSize } from '@util/util';
+import { getWidthOrWidthOfSize } from '@util/util';
 import SizeModal from '@component/size-modal';
 import { lineWidthState } from 'src/recoil';
 
@@ -11,20 +11,42 @@ import style from '@style/brush.scss';
 const BrushColor = () => {
   const [lineWidth, setLineWidth] = useRecoilState(lineWidthState);
   const [showSizeModal, setShowSizeModal] = useState(false);
+  const [brushSize, setBrushSize] = useState(BRUSH_SIZES);
+
+  useEffect(() => {
+    if (showSizeModal) {
+      return;
+    }
+    setBrushSize((prevSize: any) => {
+      if (showSizeModal) {
+        return;
+      }
+      const newSize = [...prevSize];
+      const hasSize = newSize.includes(lineWidth);
+      const hasSizeByOrigin = BRUSH_SIZES.includes(lineWidth);
+      if (newSize.length === BRUSH_SIZES.length && !hasSize) {
+        return [...newSize, lineWidth];
+      }
+      if (newSize.length > BRUSH_SIZES.length && !hasSizeByOrigin) {
+        newSize.pop();
+        return [...newSize, lineWidth];
+      }
+      return prevSize;
+    });
+  }, [lineWidth, showSizeModal]);
 
   const handleBrushSize = (size: number, flag: boolean) => {
-    if (flag) {
-      setShowSizeModal(true);
-    } else {
+    setShowSizeModal(!!flag);
+
+    if (!flag) {
       setLineWidth(size);
-      setShowSizeModal(false);
     }
   };
 
   return (
     <>
       <div className={style.brushSize}>
-        {BRUSH_SIZES.map((value: number, index: number) => (
+        {brushSize.map((value: number, index: number) => (
           <div
             key={index + value}
             className={value === lineWidth ? style.active : ''}
@@ -34,8 +56,8 @@ const BrushColor = () => {
           >
             <span
               style={{
-                width: getWidthOrHeightOfSize(value),
-                height: getWidthOrHeightOfSize(value),
+                width: getWidthOrWidthOfSize(value + 4),
+                height: getWidthOrWidthOfSize(value + 4),
               }}
             ></span>
           </div>
@@ -45,7 +67,7 @@ const BrushColor = () => {
         visible={showSizeModal}
         onCancel={() => setShowSizeModal(false)}
         updateSize={setLineWidth}
-        lineWidth={lineWidth}
+        size={lineWidth}
       />
     </>
   );

@@ -36,8 +36,16 @@ export const downloadFile = (fileName: string, content: string) => {
 
 export function getWidthOrHeightOfSize(value: number) {
   if (value) {
-    return `${((value + 10) / 750) * 200}vw`;
+    return `${(100 / window.innerHeight) * value}vw`;
   } else {
-    return 0;
+    return `1vw`;
+  }
+}
+
+export function getWidthOrWidthOfSize(value: number) {
+  if (value) {
+    return `${(100 / window.innerWidth) * value}vw`;
+  } else {
+    return `1vw`;
   }
 }
