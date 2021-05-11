@@ -1,15 +1,16 @@
 import React from 'react';
+import { useSetRecoilState } from 'recoil';
 import SvgIcon from '@src/components/svg-icon';
 import WindowIcon from '@src/images/window.svg';
-
-import { createIframe, appendToBody } from '@util/dom';
+import { showPreviewWindowState } from '@src/recoil';
 
 import s from './style.scss';
 
 const OpenWindow = () => {
+  const setShowPreviewWindow = useSetRecoilState(showPreviewWindowState);
+
   const handleCreateWindow = () => {
-    const iframeDom = createIframe(window.location.href);
-    appendToBody(iframeDom);
+    setShowPreviewWindow(true);
   };
 
   return (

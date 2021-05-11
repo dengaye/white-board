@@ -45,3 +45,13 @@ export const canvasHistoryOfReconveryState = atom<any>({
   key: 'canvasHistoryOfReconveryState',
   default: [],
 });
+
+export const showPreviewWindowState = atom({
+  key: 'showPreviewWindow',
+  default: false,
+});
+
+export const iframeMapState = atom<any>({
+  key: 'iframeMapState',
+  default: {},
+});

@@ -11,3 +11,13 @@ export const appendToBody = (dom: any) => {
 };
 
 export const getRootDOM = () => window.document.getElementById('root');
+
+export const hideRootDOM = () => {
+  const rootDOM: any = getRootDOM();
+  rootDOM.style.display = 'none';
+};
+
+export const showRootDOM = () => {
+  const rootDOM: any = getRootDOM();
+  rootDOM.style.display = 'block';
+};
