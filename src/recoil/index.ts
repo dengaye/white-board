@@ -1,5 +1,6 @@
 import { atom } from 'recoil';
 import { MODE_TYPES, BRUSH_COLORS, BRUSH_SIZES } from '@src/contants';
+import { ICanvasHistory, IcanvasHistoryOfReconvery } from '@src/types';
 
 export const canvasState = atom<any>({
   key: 'canvas',
@@ -36,12 +37,12 @@ export const lineWidthState = atom({
   default: BRUSH_SIZES[0],
 });
 
-export const canvasHistoryState = atom<any>({
+export const canvasHistoryState = atom<ICanvasHistory>({
   key: 'canvasHistoryState',
   default: [],
 });
 
-export const canvasHistoryOfReconveryState = atom<any>({
+export const canvasHistoryOfReconveryState = atom<IcanvasHistoryOfReconvery>({
   key: 'canvasHistoryOfReconveryState',
   default: [],
 });

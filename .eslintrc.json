@@ -109,6 +109,12 @@
     "react/jsx-no-target-blank": 0,
     // https://github.com/facebook/react/tree/master/packages/eslint-plugin-react-hooks
     "react-hooks/rules-of-hooks": "error",
+    "react-hooks/exhaustive-deps": [
+      "warn",
+      {
+        "additionalHooks": "(useRecoilCallback|useRecoilTransaction_UNSTABLE)"
+      }
+    ],
 
     "constructor-super": "error",
     "dot-notation": "error",

@@ -33,7 +33,7 @@ const RevokeAndReconvery = () => {
   const handleRestore = () => {
     if (canvas && canvasHistory.length) {
       const newDataUrl = [...canvasHistory];
-      const pop = newDataUrl.pop();
+      const pop = newDataUrl.pop() || '';
       const uri = newDataUrl[newDataUrl.length - 1];
       reDraw(uri);
       setCanvasHistory(newDataUrl);
@@ -48,7 +48,7 @@ const RevokeAndReconvery = () => {
     if (canvas && canvasHistoryOfReconvery.length) {
       const newDataUrl = [...canvasHistoryOfReconvery];
       const uri = newDataUrl[newDataUrl.length - 1];
-      const pop = newDataUrl.pop();
+      const pop = newDataUrl.pop() || '';
       reDraw(uri);
       setCanvasHistoryOfReconvery(newDataUrl);
       setCanvasHistory([...canvasHistory, pop]);
