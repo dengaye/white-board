@@ -17,8 +17,8 @@
     ]
   },
   "scripts": {
-    "start": "package-scripts start",
-    "build": "package-scripts build",
+    "start": "packaging-scripts start",
+    "build": "packaging-scripts build",
     "prettier": "prettier --write \"**/*.{js,jsx,ts,tsx,md,css,scss,md}\"",
     "lint": "lint-staged",
     "lint-fix": "eslint -c .eslintrc.json --cache --cache-location=.cache/.eslint --fix './src/**/*.{js,jsx,ts,tsx}'"
@@ -82,7 +82,7 @@
     "eslint-plugin-react-hooks": "^4.1.2",
     "husky": "^4.3.0",
     "lint-staged": "^10.4.0",
-    "packaging-scripts": "0.1.8",
+    "packaging-scripts": "0.2.0",
     "postcss-px-to-viewport": "^1.1.1",
     "prettier": "^2.1.2",
     "prettier-eslint": "^11.0.0",
