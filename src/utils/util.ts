@@ -1,16 +1,3 @@
-export const touchable = !!(
-  'ontouchstart' in window ||
-  (window.DocumentTouch && window.document instanceof window.DocumentTouch)
-);
-
-export const getEvent = (e: any) => {
-  let event = e;
-  if (e.touches && e.touches.length) {
-    event = e.touches[0];
-  }
-  return event;
-};
-
 export const convertBase64ToBlob = (base64Image: string) => {
   const parts = base64Image.split(';base64,');
   const imageType = parts[0].split(':')[1];

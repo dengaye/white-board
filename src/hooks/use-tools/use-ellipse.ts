@@ -1,5 +1,5 @@
 import { useRecoilValue } from 'recoil';
-import { getEvent } from '@util/util';
+import { getEvent } from '@util/events';
 import { useCommonTools } from '@src/hooks/use-tools';
 import { drawEllipse } from '@util/draw';
 import {

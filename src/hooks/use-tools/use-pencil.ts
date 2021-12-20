@@ -1,6 +1,7 @@
 import { useEffect } from 'react';
 import { useRecoilValue } from 'recoil';
-import { getEvent } from '@util/util';
+
+import { getEvent } from '@util/events';
 import { drawLine } from '@util/draw';
 import { useCommonTools } from '@src/hooks/use-tools';
 import { templateContextState, brushColorState, lineWidthState } from 'src/recoil';

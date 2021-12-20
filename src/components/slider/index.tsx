@@ -1,5 +1,7 @@
 import React, { useCallback, useEffect, useRef, useState } from 'react';
 
+import { RESULT_EVENTS, touchable, getEvent } from '@util/events';
+
 import style from './style.scss';
 
 interface ISliderProps {
@@ -32,19 +34,21 @@ function Slider(props: ISliderProps) {
   const handleTouchStart = useCallback((e: any) => {
     if (e.target) {
       setIsMove(true);
+      const event = getEvent(e);
       // 减去 offsetLeft，因为 block 的 left 每次 moveX - startX，需要再加上自身的 left
-      setState(e.touches[0].clientX - e.target.offsetLeft);
+      setState(event.clientX - e.target.offsetLeft);
     }
   }, []);
 
   const handleTouchMove = useCallback(
     (e: any) => {
       if (isMove && e.target) {
+        const event = getEvent(e);
         const halfWidth = e.target.offsetWidth / 2;
         const progressOffsetWidth = progressRef.current.offsetWidth;
         const newOffsetX = Math.max(
           -halfWidth,
-          Math.min(e.touches[0].clientX - start, progressOffsetWidth - halfWidth)
+          Math.min(event.clientX - start, progressOffsetWidth - halfWidth)
         );
         const left = `${newOffsetX}px`;
         e.target.style.left = left;
@@ -60,6 +64,19 @@ function Slider(props: ISliderProps) {
     setIsMove(false);
   }, []);
 
+  useEffect(() => {
+    if (!blockRef?.current) return;
+    blockRef?.current?.addEventListener(RESULT_EVENTS.start, handleTouchStart);
+    blockRef?.current?.addEventListener(RESULT_EVENTS.move, handleTouchMove);
+    blockRef?.current?.addEventListener(RESULT_EVENTS.end, handleTouchEnd);
+
+    return () => {
+      blockRef?.current?.removeEventListener(RESULT_EVENTS.start, handleTouchStart);
+      blockRef?.current?.removeEventListener(RESULT_EVENTS.move, handleTouchMove);
+      blockRef?.current?.removeEventListener(RESULT_EVENTS.end, handleTouchEnd);
+    };
+  }, [start, isMove]);
+
   return (
     <section className={`${style.progressContainer} ${classNameContainer}`}>
       <section className={style.progress} ref={progressRef}>
@@ -67,9 +84,9 @@ function Slider(props: ISliderProps) {
       </section>
       <section
         className={style.dragBlock}
-        onTouchStart={handleTouchStart}
-        onTouchMove={handleTouchMove}
-        onTouchEnd={handleTouchEnd}
+        // onTouchStart={handleTouchStart}
+        // onTouchMove={handleTouchMove}
+        // onTouchEnd={handleTouchEnd}
         ref={blockRef}
       >
         <section className={style.dragBlockContent}></section>
