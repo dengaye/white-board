@@ -19,7 +19,7 @@
   "homepage": "https://dengaye.github.io/white-board",
   "scripts": {
     "start": "packaging-scripts start",
-    "build": "packaging-scripts build",
+    "build": "packaging-scripts build PUBLIC_PATH='./'",
     "prettier": "prettier --write \"**/*.{js,jsx,ts,tsx,md,css,scss,md}\"",
     "lint": "lint-staged",
     "lint-fix": "eslint -c .eslintrc.json --cache --cache-location=.cache/.eslint --fix './src/**/*.{js,jsx,ts,tsx}'"
