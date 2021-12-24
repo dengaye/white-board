@@ -16,6 +16,7 @@
       "last 1 ie version"
     ]
   },
+  "homepage": "https://dengaye.github.io/white-board",
   "scripts": {
     "start": "packaging-scripts start",
     "build": "packaging-scripts build",
