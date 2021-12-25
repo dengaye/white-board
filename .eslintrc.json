@@ -175,10 +175,14 @@
           "jsx": true
         },
         "warnOnUnsupportedTypeScriptVersion": true
-      }
+      },
       // https://developer.aliyun.com/mirror/npm/package/@propelinc/eslint-plugin
       // https://cn.eslint.org/docs/rules
       // prettier
+      "rules": {
+        "no-unused-vars": "off",
+        "@typescript-eslint/no-unused-vars": ["error"]
+      }
     }
   ],
   "settings": {

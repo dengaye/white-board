@@ -21,28 +21,21 @@
     "start": "packaging-scripts start",
     "build": "packaging-scripts build PUBLIC_PATH='./'",
     "prettier": "prettier --write \"**/*.{js,jsx,ts,tsx,md,css,scss,md}\"",
-    "lint": "lint-staged",
+    "prepare": "husky install",
+    "lint-staged": "lint-staged",
     "lint-fix": "eslint -c .eslintrc.json --cache --cache-location=.cache/.eslint --fix './src/**/*.{js,jsx,ts,tsx}'"
-  },
-  "husky": {
-    "hooks": {
-      "pre-commit": "lint-staged"
-    }
   },
   "lint-staged": {
     "**/*.{md,css,json}": [
-      "prettier --write",
-      "git add"
+      "prettier --write"
     ],
-    "packages/(src/**/*.scss": [
+    "./src/**/*.scss": [
       "prettier --write",
-      "stylelint --config stylelint.config.js --syntax scss --fix",
-      "git add"
+      "stylelint --config stylelint.config.js --syntax scss --fix"
     ],
-    "src/**/*.{js,jsx,ts,tsx}": [
+    "./src/**/*.{js,jsx,ts,tsx}": [
       "prettier --config .prettierrc --write",
-      "eslint --fix",
-      "git add"
+      "yarn lint-fix"
     ]
   },
   "dependencies": {
@@ -81,8 +74,8 @@
     "eslint-plugin-prettier": "^3.1.4",
     "eslint-plugin-react": "^7.21.2",
     "eslint-plugin-react-hooks": "^4.1.2",
-    "husky": "^4.3.0",
-    "lint-staged": "^10.4.0",
+    "husky": "^7.0.4",
+    "lint-staged": "9.4.2",
     "packaging-scripts": "0.2.0",
     "postcss-px-to-viewport": "^1.1.1",
     "prettier": "^2.1.2",
