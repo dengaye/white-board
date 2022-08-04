@@ -34,7 +34,6 @@
     "src/**/*.tsx",
     "global.d.ts",
     "src/**/*.js",
-    "src/modules/controls/index.txs"
   ],
   "exclude": ["node_modules", "dist", "build"]
 }

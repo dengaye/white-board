@@ -1,5 +1,18 @@
 {
-  "presets": [["@babel/preset-env"], "@babel/preset-react"],
+  "presets": [
+    [
+      "@babel/preset-env",
+      // {
+      //   "useBuiltIns": "usage",
+      //   "corejs": {
+      //     "version": "3.10",
+      //     "proposals": true
+      //   }
+      // }
+    ],
+    "@babel/preset-react",
+    "@babel/preset-typescript"
+  ],
   "plugins": [
     "@babel/plugin-syntax-dynamic-import",
     "@babel/plugin-transform-runtime",
@@ -17,6 +30,18 @@
         "loose": true
       }
     ],
+    [
+      "@babel/plugin-proposal-private-methods",
+      {
+        "loose": true
+      }
+    ],
+    [
+      "@babel/plugin-proposal-private-property-in-object",
+      {
+        "loose": true
+      }
+    ],
     "@babel/plugin-proposal-json-strings",
     "@babel/plugin-transform-modules-commonjs",
     "@babel/plugin-syntax-optional-chaining",
@@ -24,11 +49,15 @@
   ],
   "env": {
     "test": {
-      "presets": ["@babel/preset-env"],
-      "plugins": ["dynamic-import-node"]
+      "presets": [
+        "@babel/preset-env"
+      ],
+      "plugins": [
+        "dynamic-import-node"
+      ]
     },
-    "development": {
-      "plugins": ["react-hot-loader/babel"]
-    }
+    // "development": {
+    //   "plugins": ["react-hot-loader/babel"]
+    // }
   }
 }
