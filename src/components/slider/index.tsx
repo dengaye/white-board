@@ -1,6 +1,6 @@
 import React, { useCallback, useEffect, useRef, useState } from 'react';
 
-import { RESULT_EVENTS, touchable, getEvent } from '@util/events';
+import { RESULT_EVENTS, getEvent } from '@util/events';
 
 import style from './style.scss';
 
